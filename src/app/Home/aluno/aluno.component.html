@@ -1,0 +1,18 @@
+<router-outlet>
+</router-outlet>
+<div class="container">
+    <h1>{{aluno?.nome}}</h1>
+
+    <div *ngFor="let mensagem of chat | async">
+    <md-card *ngIf="mensagem.from == 0" style="width: 50%; float:left; margin: 50px;">
+          {{mensagem?.mensagem}}
+    </md-card>
+       <md-card *ngIf="mensagem.from == 1" style="width: 50%; float:right; margin: 50px;">
+          {{mensagem?.mensagem}}
+    </md-card>
+    </div>
+
+  <input type="text" [(ngModel)]="texto">
+  <button type="button" (click)="add()"></button>
+
+</div>

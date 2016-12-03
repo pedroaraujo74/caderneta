@@ -1,0 +1,14 @@
+
+
+<md-card class="demo-card demo-basic">
+
+    <form [formGroup]="form" novalidate (ngSubmit)="login(form.value, form.valid)">
+
+        <md-input placeholder="Email" style="width: 50%" formControlName="email"></md-input>
+
+        <md-input placeholder="password" type="password" style="width: 50%" formControlName="password"></md-input>
+
+        <p>{{this.err}}</p>
+        <button md-raised-button color="primary" type="submit">Login</button>
+    </form>
+</md-card>

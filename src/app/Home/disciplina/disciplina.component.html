@@ -1,0 +1,27 @@
+<router-outlet>
+</router-outlet>
+<div class="container">
+    <h1>{{disciplina?.nome}}</h1>
+
+    <div class="row">
+        <div class="col-lg-6">
+
+            <h1>Encarregados</h1>
+
+            <md-card *ngFor="let aluno of disciplina | async;" (click)="avancar(aluno.$key)">
+                {{aluno.nome}}
+            </md-card>
+
+            <button (click)="add()">Inserir Encarregado Teste</button>
+        </div>
+        <div class="col-lg-6">
+            <h1>Feed</h1>
+
+            <md-card *ngFor="let article of feed | async;" (click)="avancar(aluno.$key)">
+                {{article.titulo}}
+            </md-card>
+
+        </div>
+
+    </div>
+</div>
