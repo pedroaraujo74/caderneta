@@ -6,7 +6,8 @@ import { Subject } from 'rxjs/Subject';
 
 @Component({
     selector: 'aluno',
-    templateUrl: 'aluno.component.html'
+    templateUrl: 'aluno.component.html',
+    styleUrls: ['chat.css']
 })
 
 
@@ -19,7 +20,7 @@ export class AlunoComponent implements OnInit {
     chat: FirebaseListObservable<any[]>;
     user: any;
     email: any;
-    aluno_obs:  FirebaseListObservable<any[]>;
+    aluno_obs: FirebaseListObservable<any[]>;
     aluno: any;
     code: any;
     query: any;
@@ -46,9 +47,9 @@ export class AlunoComponent implements OnInit {
 
         this.aluno_obs = this.af.database.list('disciplinas/' + this.id + '/encarregados/' + this.id2);
 
-        this.aluno_obs.subscribe(res => { this.aluno = res});
+        this.aluno_obs.subscribe(res => { this.aluno = res });
 
-        this.chat  = this.af.database.list('disciplinas/' + this.id + '/encarregados/' + this.id2 + '/chat');
+        this.chat = this.af.database.list('disciplinas/' + this.id + '/encarregados/' + this.id2 + '/chat');
         console.log(this.chat)
 
     }
@@ -58,12 +59,12 @@ export class AlunoComponent implements OnInit {
 
 
         this.body =
-            
-                {
-                    from: 0,
-                    mensagem: this.texto
-                }
-    
+
+            {
+                from: 0,
+                mensagem: this.texto
+            }
+
 
 
 

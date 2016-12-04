@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
 
         this.af.auth.login(model).then(res => {
             this.router.navigate(['/home'])
-
         
 
         }).catch(err => {

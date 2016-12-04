@@ -1,0 +1,24 @@
+input{
+    border: 0;
+    outline: 0;
+}
+
+.img-avatar{
+    width: 75px;
+    height: 75px;
+    margin: 0 auto;
+    margin-bottom: 5px;
+}
+
+.encarregado{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+md-tab-group{
+   top: 63px;
+   border-top: 0;
+   width: 100%;
+   text-align: center;
+   
+
+}

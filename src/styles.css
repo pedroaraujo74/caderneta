@@ -5,14 +5,17 @@ body {
   margin: 0 !important;
   font-family: Roboto, sans-serif;
   background: #ECEFF1;
+  margin-top: 80px;
 }
 
 md-card {
-  max-width: 80%;
-  margin: 2em auto;
+  margin: 1.5em auto;
   text-align: center;
 }
 
+  md-toolbar{
+    position: fixed;
+    z-index: 1000  }
 
 
 .done {
@@ -21,3 +24,16 @@ md-card {
   right: 20px;
   color: white;
 }
+
+i{
+  cursor: pointer;
+}
+.text-center{
+  text-align: center;
+}
+
+.container{
+  position: relative;
+  top: 80px;
+}
+

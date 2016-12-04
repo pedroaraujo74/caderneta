@@ -29,6 +29,7 @@ const myFirebaseAuthConfig = {
 
 const appRoutes: Routes = [
     { path: '', component: LoginComponent },
+    
     { path: 'login', component: LoginComponent },
     { path: 'registo', component: RegistoComponent },
     {

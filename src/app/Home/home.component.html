@@ -1,17 +1,7 @@
 <div>
-  <md-toolbar color="primary">
-    <span><md-icon>mood</md-icon></span>
-
-    <span>Caderneta Professor</span>
-
-    <button md-icon-button [md-menu-trigger-for]="menu">
-      <md-icon>more_vert</md-icon>
-    </button>
+  <md-toolbar color="primary" style="  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);">
+    <span>Caderneta</span>
   </md-toolbar>
-  <md-menu x-position="before" #menu="mdMenu">
-    <button md-menu-item>Option 1</button>
-    <button md-menu-item>Option 2</button>
-  </md-menu>
-  
+
 </div>
 <router-outlet></router-outlet>

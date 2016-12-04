@@ -1,27 +1,67 @@
 <router-outlet>
 </router-outlet>
+
+
+
 <div class="container">
+
+
     <h1>{{disciplina?.nome}}</h1>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
+            <md-card>
+                <h4> {{contagem}} Encarregados Registados</h4>
 
-            <h1>Encarregados</h1>
-
-            <md-card *ngFor="let aluno of disciplina | async;" (click)="avancar(aluno.$key)">
-                {{aluno.nome}}
             </md-card>
-
-            <button (click)="add()">Inserir Encarregado Teste</button>
         </div>
-        <div class="col-lg-6">
-            <h1>Feed</h1>
+        <div class="col-lg-4">
+            <md-card>
+                <h4> 0 Trabalhos de casa ativos</h4>
 
-            <md-card *ngFor="let article of feed | async;" (click)="avancar(aluno.$key)">
-                {{article.titulo}}
             </md-card>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Eventos</h1>
+            <md-card>
+                <input type="text" placeholder="Novo Evento" [(ngModel)]="evento_corpo">
+
+            </md-card>
+
+            <button md-raised-button color="primary" (click)="addEvento()" style="float: right;">Adicionar Evento</button>
+            <br>
+  <br>
+            <md-card *ngFor="let article of feed | async;">
+                <span>{{article.titulo}} </span> <span style="float:right" (click)="removeEvento(article.$key)"><i class="fa fa-times"></i>
+                </span>
+            </md-card>
+          
 
         </div>
 
     </div>
+    <div class="row">
+
+
+        <h1>Encarregados</h1>
+        <div class="encarregado" class="col-lg-3" *ngFor="let encarregado of disciplina | async;">
+            <md-card (click)="avancar(encarregado.$key)">
+                <div class="text-center">
+                    <img [src]="encarregado.photoUrl" class="img-circle img-responsive img-avatar ">
+                </div>
+                <p> {{encarregado.nome}} </p>
+                <p> Filho: {{encarregado.filho}} </p>
+                <button md-raised-button color="primary" (click)="add()">Mais Info</button>
+                <button md-raised-button color="primary" (click)="add()">Chat</button>
+            </md-card>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <button md-raised-button color="primary" (click)="add()">Inserir Encarregado Teste</button>
+    </div>
+
 </div>

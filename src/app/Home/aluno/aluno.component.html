@@ -1,18 +1,24 @@
 <router-outlet>
 </router-outlet>
 <div class="container">
-    <h1>{{aluno?.nome}}</h1>
+      <h1>{{aluno?.nome}}</h1>
 
-    <div *ngFor="let mensagem of chat | async">
-    <md-card *ngIf="mensagem.from == 0" style="width: 50%; float:left; margin: 50px;">
-          {{mensagem?.mensagem}}
-    </md-card>
-       <md-card *ngIf="mensagem.from == 1" style="width: 50%; float:right; margin: 50px;">
-          {{mensagem?.mensagem}}
-    </md-card>
-    </div>
+      <div *ngFor="let mensagem of chat | async">
+            <div class="row">
+            <div *ngIf="mensagem.from == 0" class=" balao" style="background: #ccc; float: left; margin-top: 25px;">
+                  {{mensagem?.mensagem}}
+            </div>
+            </div>
+            <div class="row">
+            <div *ngIf="mensagem.from == 1" class=" balao" style="background: #2196F3; color: white; float:right; margin-top: 25px;">
+                  {{mensagem?.mensagem}}
+            </div>
+      </div>
+      </div>
 
-  <input type="text" [(ngModel)]="texto">
-  <button type="button" (click)="add()"></button>
-
+      <div>
+            <md-input placeholder="mensagem" [(ngModel)]="texto">
+            </md-input>
+           <button md-raised-button color="primary" (click)="add()">Enviar</button>
+      </div>
 </div>

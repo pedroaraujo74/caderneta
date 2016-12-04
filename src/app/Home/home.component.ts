@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
 
     }
 
-     ngOnInit() {
+    ngOnInit() {
         this.router.navigateByUrl('/home/disciplinas')
     }
 
