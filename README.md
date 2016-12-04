@@ -15,10 +15,19 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Base de Dados simplificada 
 
-*Disciplinas
- *Disciplina_ID (nome, prof_ID)
-  *Encarregados
-   *Encarregado_ID (nome, filho, foto)
-    *Chat
-   *Feed
-    *Artigo_ID
+* Disciplinas
+ * Disciplina_ID (nome, prof_ID)
+  * Encarregados
+   * Encarregado_ID (nome, filho, foto)
+    * Chat
+   * Feed
+    * Artigo_ID
+
+## Funcionamento
+
+#### Desktop:
+
+* Quando o prof cria uma disciplina é criado um campo dentro da disciplina com o ID do prof (prof_ID)
+* Quando o prof faz login é feita uma query que só lista as disciplinas com o prof ID igual ao ID do prof que tem o login feito.
+
+
