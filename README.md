@@ -13,19 +13,11 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Running unit tests
+## Funcionamento
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### Desktop:
 
-## Running end-to-end tests
+* Quando o prof cria uma disciplina é criado um campo dentro da disciplina com o ID do prof (prof_ID)
+* Quando o prof faz login é feita uma query que só lista as disciplinas com o prof ID igual ao ID do prof que tem o login feito.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
 
-## Deploying to Github Pages
-
-Run `ng github-pages:deploy` to deploy to Github Pages.
-
-## Further help
-
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
