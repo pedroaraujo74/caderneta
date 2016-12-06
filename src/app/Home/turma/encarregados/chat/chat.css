@@ -1,0 +1,77 @@
+.perfil_container .row{
+    margin-bottom: 20px;
+}
+
+.balao{
+    background: #fff;
+   
+    padding: 5px 10px 5px 10px;
+    border-radius: 30px;
+}
+
+.container{
+  position: relative;
+  top: 100px;
+}
+.container-fluid{
+      position: relative;
+  top: 100px;
+}
+.chat_container{
+   height: 600px;
+    overflow-x: hidden;
+    /* overflow: scroll; */
+    overflow-y: scroll;
+    padding: 40px;
+}
+
+.img-avatar{
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: middle;
+}
+.img-chat{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    float:left;
+    margin-right: 10px;
+}
+.perfil_container{
+    border-right:1px solid #ccc;
+     height: 600px;
+}
+
+md-card{
+    padding: 0 !important;
+}
+
+.person_name{
+    height: 50px;
+    background: #2196F3;
+}
+
+.person_name h5{
+    line-height: 32px;
+    color: #fff;
+    text-transform: uppercase;
+}
+.user-info{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.user-info span{
+    margin-left: 10px;
+    color: #aaa;
+}
+.contacts h4{
+    text-transform: uppercase;
+    color: #aaa;
+    
+}
+.contacts{
+    text-align: left;
+}

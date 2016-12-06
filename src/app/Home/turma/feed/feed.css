@@ -1,0 +1,137 @@
+.eventCard{
+    padding-bottom: 0;
+}
+
+.container{
+        position: relative;
+    top: 100px !important;
+}
+
+.container{
+  position: relative;
+  top: 100px;
+}
+.container-fluid{
+      position: relative;
+  top: 100px;
+}
+.sidemenu{
+    height: 100%;
+    position: fixed;
+    background: #fff;
+    margin-left: -15px;
+    padding: 0;
+}
+.descricao{
+    width: 100%;
+}
+.fab{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+
+}
+
+.feed_inputs{
+    text-align: left;
+}
+
+.feed_inputs md-input{
+    margin-right: 10px;
+}
+.tipos_inputs{
+    margin-top: 10px;
+    text-align: left;
+    padding-bottom: 10px;
+}
+.tipos_inputs md-radio-button{
+    margin-left: 15px;
+}
+ng2-select{
+    display: inline-flex;
+}
+
+.card{
+  padding: 10px;
+}
+.feed{
+       margin-left: 25%;
+        margin-top: 50px;
+        
+}
+.articles{
+        margin-left: 25%;
+        margin-top: 50px;
+}
+.card_event{
+    padding: 15px;
+    padding-top: 0;
+    height: 200px;
+    overflow: hidden;
+}
+
+.img-avatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.card_event .row{
+    margin-bottom: 10px;
+}
+.card_event .header p{
+    text-align: left;
+    line-height: 50px;
+}
+.card_event i{
+    margin-right: 5px;
+}
+.card_event .header{
+    height: 50px;
+    background: #2196F3;
+    text-align: left;
+    color: #fff;
+    text-transform: uppercase;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.imagem1{
+    background-image: url('https://lh3.googleusercontent.com/-nv5bsmoh1qE/VE0Q4icLZ9I/AAAAAAAAMLo/W3IaMYoWj4Q/w1366-h768/image.jpg%252822%2529.png');
+    background-size: cover;
+    height: 150px;
+    margin-top: -15px;
+}
+
+.sidemenu .content{
+        top: 100px;
+    position: relative;
+}
+.sidemenu .header{
+    height: 60px;
+    border-bottom: 1px solid #ccc;
+    background: #eee;
+
+}
+.sidemenu .body{
+    margin-left: 15px;
+    margin-top: 40px;
+}
+.sidemenu .checkboxes li{
+    margin-top: 15px;
+    list-style-type: none
+}
+.sidemenu .body p{
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-left: 35px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+        color: rgba(0,0,0,0.54);
+}
+
+.sidemenu h3{
+    color: rgba(0,0,0,0.54);
+    margin-top: 0;
+    line-height: 60px;
+    margin-left: 30px;
+}

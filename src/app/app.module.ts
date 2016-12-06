@@ -11,9 +11,14 @@ import { RegistoComponent } from './registo/registo.component'
 
 import { MaterialModule } from '@angular/material';
 import { HomeComponent } from './home/home.component';
-import { DisciplinasComponent } from './home/disciplinas/disciplinas.component';
-import { DisciplinaComponent } from './home/disciplina/disciplina.component';
-import { AlunoComponent } from './home/aluno/aluno.component'
+import { TurmasComponent } from './home/turmas/turmas.component';
+import { TurmaComponent } from './home/turma/turma.component';
+import { ChatComponent } from './home/turma/encarregados/chat/chat.component'
+import { FeedComponent } from './home/turma/feed/feed.component';
+import { EncarregadosComponent } from './home/turma/encarregados/encarregados.component';
+import { DatepickerModule } from 'angular2-material-datepicker';
+import { Ng2SelectModule } from 'ng2-material-select';
+
 
 const myFirebaseConfig = {
     apiKey: 'AIzaSyDMuTuGTOL0hANsZ7ZS11rY9vZtYABUVbM',
@@ -26,28 +31,34 @@ const myFirebaseAuthConfig = {
     method: AuthMethods.Password,
 }
 
-
 const appRoutes: Routes = [
     { path: '', component: LoginComponent },
-    
+
     { path: 'login', component: LoginComponent },
     { path: 'registo', component: RegistoComponent },
     {
         path: 'home', component: HomeComponent,
         children: [
             {
-                path: 'disciplinas', component: DisciplinasComponent
+                path: 'turmas', component: TurmasComponent
             },
             {
-                path: 'disciplina/:id', component: DisciplinaComponent
-            },
-            {
-                path: 'disciplina/:id/:id2', component: AlunoComponent
+                path: 'turma/:id', component: TurmaComponent, children: [
+                    {
+                        path: 'feed', component: FeedComponent
+                    },
+                    {
+                        path: 'encarregados', component: EncarregadosComponent
+                    },
+                    {
+                        path: 'encarregados/:id', component: ChatComponent
+                    }
+                ],
             }
+
         ]
     },
 ];
-
 
 @NgModule({
     declarations: [
@@ -55,23 +66,26 @@ const appRoutes: Routes = [
         RegistoComponent,
         AppComponent,
         HomeComponent,
-        DisciplinasComponent,
-        DisciplinaComponent,
-        AlunoComponent
-
-
+        TurmasComponent,
+        TurmaComponent,
+        ChatComponent,
+        FeedComponent,
+        EncarregadosComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
         HttpModule,
+        DatepickerModule,
+        Ng2SelectModule,
         AngularFireModule.initializeApp(myFirebaseConfig, myFirebaseAuthConfig),
         [MaterialModule.forRoot()],
         RouterModule.forRoot(appRoutes)
-
     ],
     providers: [],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

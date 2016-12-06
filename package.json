@@ -26,6 +26,7 @@
     "firebase": "^3.6.1",
     "font-awesome": "^4.7.0",
     "ng2-bootstrap": "^1.1.16",
+    "ng2-material-select": "^0.1.4",
     "rxjs": "5.0.0-beta.12",
     "ts-helpers": "^1.1.1",
     "zone.js": "^0.6.23"

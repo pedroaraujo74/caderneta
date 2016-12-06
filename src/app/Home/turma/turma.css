@@ -1,0 +1,72 @@
+input{
+    border: 0;
+    outline: 0;
+}
+
+
+
+.encarregado{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
+.nav-tabs{
+    margin: 0 auto;
+    top: 63px;
+    position: fixed;
+    background: #2196F3;
+    width: 100%;
+    color: #fff !important;
+    z-index: 1000;
+    text-align: center;
+    border: 0 !important;
+        font-size: 16px;
+}
+.nav-tabs > li{
+    color: #fff !important;
+    display: inline-block;
+    float:none !important;
+}
+.nav>li>a {
+color: rgba(255,255,255,0.56);
+border: none;
+text-transform: uppercase;
+
+}
+.container{
+  position: relative;
+  top: 100px;
+}
+.container-fluid{
+      position: relative;
+  top: 100px;
+}
+
+.active{
+    color: #fff !important;
+}
+.active a {
+    color: #fff;
+}
+.active::after{
+ content: ""; background: #fff; height: 2px; position: absolute; width: 100%; left: 0px; bottom: 0px; transition: all 250ms ease 0s; transform: scale(0);
+}
+
+
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
+
+        .nav-tabs > li.active > a, .nav-tabs > li > a:hover { border: none; color: #fff !important; background: transparent; }
+
+        .nav-tabs > li > a::after { content: ""; background: #fff; height: 2px; position: absolute; width: 100%; left: 0px; bottom: 0px; transition: all 250ms ease 0s; transform: scale(0); }
+    .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }
+.tab-nav > li > a::after { background: #2196F3 none repeat scroll 0% 0%; color: #fff; }
+.tab-pane { padding: 15px 0; }
+.tab-content{padding:20px}
+
+.nav>li>a:focus, .nav>li>a:hover {
+    background: transparent !important;
+}
+.eventCard{
+    height: 150px;
+}

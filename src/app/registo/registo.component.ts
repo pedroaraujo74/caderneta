@@ -27,20 +27,38 @@ export class RegistoComponent implements OnInit {
             email: "",
             password: ""
         });
+
+
+
     }
 
     registar(model: User, isValid: boolean) {
 
 
+        this.body = {
+            name: model.name,
+            email: model.email,
+        }
+
         this.af.auth.createUser(model).then(res => {
             console.log(res);
 
-            this.http.post('https://caderneta-2b6e4.firebaseio.com/professores.json', model)
+
+
+
+            this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + this.af.auth.getAuth().uid + '/.json', this.body)
                 .map(res => res.json())
                 .subscribe(
-                data => console.log("sucesso"),
-                err =>
-                    () => console.log('complete')
+                data => {
+                    let teste = this.af.auth.subscribe(res => {
+                        res.auth.updateProfile({
+                            displayName: "professor",
+                            photoURL: ""
+                        })
+                    })
+                },
+
+                err => console.log(err)
                 );
             this.router.navigate(['/login'])
         }

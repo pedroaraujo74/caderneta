@@ -1,7 +1,13 @@
 <div>
   <md-toolbar color="primary" style="  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);">
     <span>Caderneta</span>
-  </md-toolbar>
+    <span class="example-fill-remaining-space"></span>
+    <i class="fa fa-bell" style="margin-right: 15px;"></i>
+    <i class="fa fa-user" style="margin-right: 15px;"></i>
+    <i class="fa fa-sign-out" style="margin-right: 15px;"></i>
+    <img [src]="photo" class="img-thumb">
 
+  </md-toolbar>
 </div>
+
 <router-outlet></router-outlet>

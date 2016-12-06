@@ -36,8 +36,16 @@ export class LoginComponent implements OnInit {
 
 
         this.af.auth.login(model).then(res => {
-            this.router.navigate(['/home'])
-        
+
+            this.af.auth.subscribe(res => {
+                if (res.auth.displayName == "professor") {
+                    this.router.navigate(['/home/turmas'])
+                } else {
+                    this.err = "Esta Conta não pertence a um professor";
+                }
+            })
+
+
 
         }).catch(err => {
             this.err = err.message;
@@ -46,5 +54,9 @@ export class LoginComponent implements OnInit {
 
     logout() {
         this.af.auth.logout();
+    }
+
+    registar() {
+        this.router.navigate(['/registo'])
     }
 }

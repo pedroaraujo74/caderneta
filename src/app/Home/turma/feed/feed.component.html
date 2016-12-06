@@ -1,0 +1,154 @@
+<div class="container-fluid">
+    <div class="col-lg-2 sidemenu md-elevation-z1">
+        <div class="content">
+            <div class="header">
+                <h3><i class="fa fa-filter" aria-hidden="true" style="margin-right: 10px"></i>Filtros</h3>
+
+            </div>
+            <div class="body">
+
+                
+                <p> Filtragem </p>
+                <ul class="checkboxes">
+                    <li>
+                        <md-checkbox checked="false">
+                            Apenas eventos para hoje
+                        </md-checkbox>
+                    </li>
+                    <li>
+                        <md-checkbox checked="false">
+                            Apenas Trabalhos de Casa
+                        </md-checkbox>
+                    </li>
+
+                    <li>
+                        <md-checkbox checked="false">
+                            Apenas Visitas de Estudo
+                        </md-checkbox>
+                    </li>
+                </ul>
+
+                <p> Ordenação </p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-8 feed animated fadeInDown" *ngIf="insertMode">
+
+        <div class="col-lg-12">
+
+
+          
+
+            <form [formGroup]="form" novalidate (ngSubmit)="addEvent(form.value, form.valid)">
+                <md-card class="eventCard row">
+
+                    <div class="row">
+
+
+                        <div class="col-lg-12">
+                            <md-input placeholder="Descrição" formControlName="desc" class="descricao"></md-input>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 feed_inputs">
+                            <span> Titulo </span>
+                            <md-input placeholder="Titulo" formControlName="title"></md-input>
+                            <span> Data: </span>
+                            <material-datepicker [(date)]="date" [placeholder]="'Data'"></material-datepicker>
+                            <span> Disciplina: </span>
+                            <ng2-select [placeholder]="'disciplina'" [options]="options" formControlName="disciplina"></ng2-select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-8 tipos_inputs">
+                            <md-radio-group formControlName="type">
+                                <md-radio-button value="0">Trabalho de Casa</md-radio-button>
+                                <md-radio-button value="1">Evento</md-radio-button>
+                            </md-radio-group>
+                        </div>
+                        <div class="col-lg-2">
+                            <button md-raised-button color="primary">Adicionar Evento</button>
+                        </div>
+                        <div class="col-lg-2">
+                            <button md-raised-button color="primary" (click)="insertMode = false">Cancelar</button>
+                        </div>
+                    </div>
+                </md-card>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="col-lg-8  articles ">
+        <div class="col-lg-4 card animated fadeInUp" *ngFor="let article of feed | async;" >
+            <md-card class="card_event" *ngIf="article.type == 0">
+
+                <div class="row header md-elevation-z1">
+                    <div class="col-lg-12">
+                        <p><i class="fa fa-pencil" aria-hidden="true" style="color: #FF9800;"></i>{{article.title}} <span (click)="removeEvento(article.$key)"
+                                style="float:right; color: #F44336;"> <i class="fa fa-times"></i></span></p>
+
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #ccc">
+                    <div class="col-lg-4" style="text-align: left;">
+                        <p><i class="fa fa-book" aria-hidden="true"></i>{{article.disciplina}}</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <p><i class="fa fa-calendar" aria-hidden="true"></i>{{article.dateCreation | date}}</p>
+                    </div>
+                    <div class="col-lg-4" style="text-align: right;">
+                        <p><i class="fa fa-book" aria-hidden="true"></i>{{article.disciplina}}</p>
+                    </div>
+                </div>
+                <div class="row body">
+                    <div class="col-lg-12" style="text-align: left">
+                        <p>{{article.desc}}</p>
+                    </div>
+                </div>
+
+
+
+            </md-card>
+            <md-card class="card_event" *ngIf="article.type == 1">
+
+                <div class="row">
+
+                    <div class="col-lg-12 imagem1">
+
+                        <h3>{{article.title}}</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <span>{{article.dateCreation | date}}</span>
+                    </div>
+                    <div class="col-lg-4">
+                        <span>{{article.eventDate | date}}</span>
+                    </div>
+                    <div class="col-lg-4">
+                        <span>{{article.type}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>{{article.desc}}</p>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <span (click)="removeEvento(article.$key)"><i class="fa fa-times"></i></span>
+                </div>
+            </md-card>
+        </div>
+    </div>
+
+    <button md-fab class="fab" (click)="insertMode = true">
+    <md-icon class="md-24">add</md-icon>
+</button>
+</div>

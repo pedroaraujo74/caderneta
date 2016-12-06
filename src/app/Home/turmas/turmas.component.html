@@ -1,0 +1,19 @@
+<router-outlet>
+</router-outlet>
+
+<div class="container">
+    <h1>Bem-Vindo {{teacher?.name}}</h1>
+    <p *ngIf="!disciplinas">
+        <md-progress-circle mode="indeterminate" color="primary"></md-progress-circle>
+    </p>
+    <md-card *ngFor="let disciplina of disciplinas | async; let i = index; " (click)='goto(disciplina.$key)'>
+        {{disciplina.nome}}
+    </md-card>
+
+
+    <md-input placeholder="Nome" [(ngModel)]="class_name">
+    </md-input>
+
+    <button md-raised-button color="primary" (click)="add()">Adicionar Turma</button>
+    
+</div>

@@ -1,14 +1,34 @@
+<!--
+<div class="container">
+<div class="row">
 
-
-<md-card class="demo-card demo-basic">
+<md-card class="login-card col-lg-9 col-lg-offset-3">
 
     <form [formGroup]="form" novalidate (ngSubmit)="login(form.value, form.valid)">
+        <div class="col-lg-9 col-lg-offset-3">
+        <md-input placeholder="Email"  formControlName="email"></md-input>
 
-        <md-input placeholder="Email" style="width: 50%" formControlName="email"></md-input>
-
-        <md-input placeholder="password" type="password" style="width: 50%" formControlName="password"></md-input>
+        <md-input placeholder="password" type="password" formControlName="password"></md-input>
 
         <p>{{this.err}}</p>
         <button md-raised-button color="primary" type="submit">Login</button>
+        <button md-raised-button color="primary" type="button" (click)="registar()">Registar Novo Professor</button>
+        </div>
     </form>
 </md-card>
+</div>
+
+
+</div>
+
+-->
+
+
+ <form [formGroup]="form" novalidate (ngSubmit)="login(form.value, form.valid)">
+    <md-input placeholder="Email" formControlName="email"></md-input>
+
+    <md-input placeholder="password" type="password" formControlName="password"></md-input>
+
+    <button md-raised-button color="primary" type="submit">Login</button>
+    <button md-raised-button color="primary" type="button" (click)="registar()">Registar Novo Professor</button>
+</form>

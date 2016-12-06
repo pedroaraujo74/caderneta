@@ -1,3 +1,4 @@
+<!--
 <h1> Registo </h1>
 
 <md-card class="demo-card demo-basic">
@@ -17,3 +18,20 @@
 
   </md-card-content>
 </md-card>
+
+-->
+
+
+<form [formGroup]="form" novalidate (ngSubmit)="registar(form.value, form.valid)">
+
+  <md-input placeholder="Nome" formControlName="name"></md-input>
+
+  <md-input placeholder="Email" formControlName="email"></md-input>
+
+  <md-input placeholder="password" type="password" formControlName="password"></md-input>
+  
+  <button md-raised-button color="primary" type="submit">Registar</button>
+
+
+  <p>{{this.err}}</p>
+</form>

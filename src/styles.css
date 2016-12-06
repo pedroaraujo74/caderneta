@@ -7,6 +7,13 @@ body {
   background: #ECEFF1;
   margin-top: 80px;
 }
+.img-thumb{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-left: 5px;
+}
 
 md-card {
   margin: 1.5em auto;
@@ -15,8 +22,9 @@ md-card {
 
   md-toolbar{
     position: fixed;
-    z-index: 1000  }
-
+    z-index: 1000;
+    text-align: center;
+  }
 
 .done {
   position: fixed;
@@ -36,4 +44,10 @@ i{
   position: relative;
   top: 80px;
 }
+
+.example-fill-remaining-space{
+    flex: 1 1 auto;
+}
+
+
 

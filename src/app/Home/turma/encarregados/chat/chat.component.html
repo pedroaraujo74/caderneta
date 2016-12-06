@@ -1,0 +1,72 @@
+<router-outlet>
+</router-outlet>
+<div class="container">
+
+      <md-card class="row ">
+            <div class="col-lg-3 perfil_container">
+                  <div class="row person_name md-elevation-z3">
+                        <h5>{{user?.firstName}} {{user?.lastName}}</h5>
+                  </div>
+                  <div class="row user-info">
+                        <div class="col-lg-3" style="text-align:left">
+                              <img [src]="user?.photoUrl" alt="" class="img-avatar">
+                        </div>
+
+                        <div class="col-lg-9" style="text-align: left; padding-top: 10px; padding-left: 30px;">
+                              <p>{{user?.firstName}} {{user?.lastName}}</p>
+                              <p>Pai de: {{user?.filho}}</p>
+                        </div>
+
+                  </div>
+                  <div class="row contacts">
+                        <div class="col-lg-12">
+                              <h4>Dados Pessoais</h4>
+
+                              <p><strong>Data de Nascimento</strong> {{user?.dn}} </p>
+                              <p><strong> Genero: </strong>
+                                    <span *ngIf="user?.genero == 0">Masculino </span>
+                                    <span *ngIf="user?.genero == 1">Feminino </span>
+                              </p>
+                        </div>
+                  </div>
+                  <div class="row contacts">
+                        <div class="col-lg-12">
+                              <h4>Contactos</h4>
+
+                              <p><strong>Email:</strong> {{user?.email}} </p>
+                              <p><strong> Telemóvel: </strong> {{user?.telemovel}}</p>
+                        </div>
+                  </div>
+
+            </div>
+
+            <div class="col-lg-9 chat_container" #scrollMe>
+                  <div *ngFor="let mensagem of chat | async">
+                        <div class="row" style="margin-top: 10px;">
+
+                              <div *ngIf="mensagem.from == 0" class="balao" style="background: #2196F3; color: white; float: right;">
+                                    {{mensagem?.mensagem}}
+                              </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px;">
+                              <img *ngIf="mensagem.from == 1" [src]="user?.photoUrl" class="img-chat">
+                              <div *ngIf="mensagem.from == 1" class=" balao" style="background: #ECEFF1;  float:left;">
+                                    {{mensagem?.mensagem}}
+                              </div>
+                        </div>
+                  </div>
+
+
+            </div>
+            <div class="row">
+                  <div class="col-lg-8 col-lg-offset-3">
+                        <div class="col-lg-10">
+                              <md-input placeholder="mensagem" [(ngModel)]="texto" style="width: 100%;"></md-input>
+                        </div>
+                        <div class="col-lg-2">
+                              <button md-raised-button color="primary" (click)="add()">Enviar</button>
+                        </div>
+                  </div>
+            </div>
+      </md-card>
+</div>
