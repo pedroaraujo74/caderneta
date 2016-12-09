@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire } from 'angularfire2';
+import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { Router } from '@angular/router'
 import { Http } from "@angular/http"
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit {
             email: "",
             password: ""
         });
+
+        this.af.auth.subscribe(auth => console.log(auth));
     }
 
 
@@ -46,14 +48,32 @@ export class LoginComponent implements OnInit {
             })
 
 
-
         }).catch(err => {
             this.err = err.message;
         })
     }
 
-    logout() {
-        this.af.auth.logout();
+    loginGoogle() {
+
+        this.af.auth.login({
+            provider: AuthProviders.Google,
+            method: AuthMethods.Popup
+        }).then(res => {
+
+            this.http.get('https://caderneta-2b6e4.firebaseio.com/professores/' + res.auth.uid + '.json')
+                .subscribe(data => {
+                    console.log(data.json);
+                    if (data.json() == null) {
+                        this.router.navigate(['/registo_social'])
+                    } else {
+                        this.router.navigate(['/home/turmas'])
+                    }
+
+                });
+
+        })
+
+
     }
 
     registar() {

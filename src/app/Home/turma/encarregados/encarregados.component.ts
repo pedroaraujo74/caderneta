@@ -33,11 +33,6 @@ export class EncarregadosComponent implements OnInit {
             }
         });
 
-        this.disciplina.subscribe(res => {
-            console.log(res);
-            this.contagem = res.length;
-        })
-
 
     }
     avancar(id) {

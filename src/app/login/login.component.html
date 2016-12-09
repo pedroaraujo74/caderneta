@@ -29,6 +29,8 @@
 
     <md-input placeholder="password" type="password" formControlName="password"></md-input>
 
+    <button md-raised-button color="primary" type="button" (click)="loginGoogle()">Login Com Google</button>
     <button md-raised-button color="primary" type="submit">Login</button>
     <button md-raised-button color="primary" type="button" (click)="registar()">Registar Novo Professor</button>
+    {{err}}
 </form>

@@ -1,0 +1,40 @@
+<!--
+<h1> Registo </h1>
+
+<md-card class="demo-card demo-basic">
+  <md-toolbar color="primary">Basic</md-toolbar>
+  <md-card-content>
+    <form [formGroup]="form" novalidate (ngSubmit)="registar(form.value, form.valid)">
+
+      <md-input placeholder="Nome" style="width: 50%" formControlName="name"></md-input>
+
+      <md-input placeholder="Email" style="width: 50%" formControlName="email"></md-input>
+
+      <md-input placeholder="password" style="width: 50%" type="password" formControlName="password"></md-input>
+
+      <button md-raised-button color="primary" type="submit">Registar</button>
+      <p>{{this.err}}</p>
+    </form>
+
+  </md-card-content>
+</md-card>
+
+-->
+
+
+<form [formGroup]="form" novalidate (ngSubmit)="registar(form.value, form.valid)">
+
+  <md-input placeholder="{{name}}" formControlName="name"> </md-input>
+
+  <md-input placeholder="{{email}}" formControlName="email"></md-input>
+
+  <md-input placeholder="Professor de" type="text" formControlName="disciplina"></md-input>
+
+  <md-input placeholder="Codigo da Disciplina" type="text" formControlName="codigo_turma"></md-input>
+
+
+  <button md-raised-button color="primary" type="submit">Registar</button>
+
+
+  <p>{{this.err}}</p>
+</form>

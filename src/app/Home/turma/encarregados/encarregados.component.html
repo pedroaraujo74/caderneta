@@ -1,5 +1,5 @@
 <div class="container">
-<div class="row encarregados ">
+    <div class="row encarregados ">
         <div class="encarregado col-lg-3 animated fadeInUp" *ngFor="let encarregado of disciplina | async;">
             <md-card (click)="avancar(encarregado.$key)">
                 <div class="text-center">
@@ -7,7 +7,7 @@
                 </div>
                 <p> {{encarregado.firstName}} {{encarregado.lastName}} </p>
                 <p> <strong>Pai de: </strong> {{encarregado.filho}}</p>
-    
+
                 <button md-raised-button color="primary" style="width: 100%" (click)="avancar(encarregado.$key)">Ver</button>
             </md-card>
         </div>

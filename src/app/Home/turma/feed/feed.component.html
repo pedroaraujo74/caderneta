@@ -84,7 +84,7 @@
     </div>
 
     <div class="col-lg-8  articles ">
-        <div class="col-lg-4 card animated fadeInUp" *ngFor="let article of feed | async;" >
+        <div class="col-lg-4 card" *ngFor="let article of feed | async;" >
             <md-card class="card_event" *ngIf="article.type == 0">
 
                 <div class="row header md-elevation-z1">
@@ -96,7 +96,7 @@
                 </div>
                 <div class="row" style="border-bottom: 1px solid #ccc">
                     <div class="col-lg-4" style="text-align: left;">
-                        <p><i class="fa fa-book" aria-hidden="true"></i>{{article.disciplina}}</p>
+                        <p><img [src]="article.photoUrl" class="img-responsive img-small" style="display:inline; margin-right: 10px;">{{article.createdBy}}</p>
                     </div>
                     <div class="col-lg-4">
                         <p><i class="fa fa-calendar" aria-hidden="true"></i>{{article.dateCreation | date}}</p>

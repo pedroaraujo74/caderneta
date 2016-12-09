@@ -1,0 +1,16 @@
+<div class="container">
+<div class="row encarregados ">
+        <div class="encarregado col-lg-3 animated fadeInUp" *ngFor="let professor of professores | async;">
+            <md-card (click)="avancar(encarregado.$key)">
+                <div class="text-center">
+                    <img [src]="professor.photoUrl" class="img-circle img-responsive img-avatar ">
+                </div>
+                <p> {{professor.name}}</p>
+                <p>  Professor de: {{professor.disciplina}}
+    
+                <button md-raised-button color="primary" style="width: 100%">Ver</button>
+            </md-card>
+        </div>
+
+    </div>
+</div>

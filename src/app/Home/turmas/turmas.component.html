@@ -2,7 +2,7 @@
 </router-outlet>
 
 <div class="container">
-    <h1>Bem-Vindo {{teacher?.name}}</h1>
+    <h1>Bem-Vindo <span *ngIf="teacher?.codigo_turma == undefined">Diretor de Turma</span> {{teacher?.name}}</h1>
     <p *ngIf="!disciplinas">
         <md-progress-circle mode="indeterminate" color="primary"></md-progress-circle>
     </p>
@@ -15,5 +15,5 @@
     </md-input>
 
     <button md-raised-button color="primary" (click)="add()">Adicionar Turma</button>
-    
+
 </div>

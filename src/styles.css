@@ -25,7 +25,9 @@ md-card {
     z-index: 1000;
     text-align: center;
   }
-
+.active-icon{
+  color: #FFC107;
+}
 .done {
   position: fixed;
   bottom: 20px;

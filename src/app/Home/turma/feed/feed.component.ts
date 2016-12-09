@@ -14,19 +14,24 @@ export class FeedComponent implements OnInit {
     form: any;
     date: any;
     id: string;
+    body: any;
     feed: any;
     teacher: any;
     search: any;
     photo: any;
-    searchMode : boolean = false;
-    insertMode : boolean = false;
+    searchMode: boolean = false;
+    insertMode: boolean = false;
     options =
     ['português', "inglês"];
     constructor(private af: AngularFire, private route: ActivatedRoute, private _fb: FormBuilder, private http: Http) { }
 
     ngOnInit() {
 
-this.search = 0;
+
+
+
+
+        this.search = 0;
         this.form = this._fb.group({
             title: "",
             desc: "",
@@ -41,35 +46,46 @@ this.search = 0;
 
         this.feed = this.af.database.list('turmas/' + this.id + '/feed');
 
-        let teacher_obs = this.af.database.list('/professores', {
-            query: {
-                orderByKey: true,
-                equalTo: 'CKiiePZGPNQMYjUbDAW6YqIeINh1'
-            }
-        });
+        this.af.auth.subscribe(res => {
 
-        teacher_obs.subscribe(res => { this.teacher = res[0]; console.log(this.teacher) });
-
-        this.af.auth.subscribe(res => { 
-        
-        this.photo = res.auth.photoURL;
+            this.photo = res.auth.photoURL;
 
         });
-    
+
     }
 
 
-    addEvent(model: Event, isValid: boolean) {
-        console.log(model);
+    addEvent(model, isValid: boolean) {
 
 
-        this.http.post('https://caderneta-2b6e4.firebaseio.com/turmas/' + this.id + '/feed.json', model)
-            .map(res => res.json())
-            .subscribe(
-            data => { console.log("sucesso") },
-            err =>
-                () => console.log('complete')
-            );
+        this.af.auth.subscribe(res => {
+
+            this.http.get('https://caderneta-2b6e4.firebaseio.com/professores/' + res.uid + '.json')
+                .map(res => res).subscribe(data => {
+                    this.teacher = data.json();
+
+                    this.body = {
+                        title: model.title,
+                        desc: model.desc,
+                        eventDate: model.desc,
+                        dateCreation: Date.now(),
+                        type: 0,
+                        disciplina: this.teacher.disciplina,
+                        createdBy: this.teacher.name,
+                        photoUrl: this.teacher.photoUrl
+                    }
+
+
+                    this.http.post('https://caderneta-2b6e4.firebaseio.com/turmas/' + this.id + '/feed.json', this.body)
+                        .map(res => res.json())
+                        .subscribe(
+                        data => { console.log("sucesso") },
+                        err =>
+                            () => console.log('complete')
+                        );
+
+                });
+        });
     }
 
     removeEvento(id) {

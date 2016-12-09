@@ -27,11 +27,10 @@ export class TurmaComponent implements OnInit {
     encarregadoTeste: any;
     form: any;
 
-    constructor(public af: AngularFire, private http: Http, private router: Router, private route: ActivatedRoute, private _fb: FormBuilder) {}
+    constructor(public af: AngularFire, private http: Http, private router: Router, private route: ActivatedRoute, private _fb: FormBuilder) { }
 
     ngOnInit() {
 
-   
 
         this.af.auth.subscribe(res => {
 
@@ -46,21 +45,20 @@ export class TurmaComponent implements OnInit {
 
         });
 
-
     }
 
 
- 
+
 
 
     add() {
 
-    
+
 
 
     }
 
-   
+
 
 
 }

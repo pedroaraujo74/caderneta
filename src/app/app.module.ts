@@ -8,15 +8,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegistoComponent } from './registo/registo.component'
+import { RegistoSocialComponent } from './registo_social/registo_social.component'
 
 import { MaterialModule } from '@angular/material';
+
 import { HomeComponent } from './home/home.component';
+import { PerfilComponent } from './home/perfil/perfil.component';
 import { TurmasComponent } from './home/turmas/turmas.component';
 import { TurmaComponent } from './home/turma/turma.component';
 import { ChatComponent } from './home/turma/encarregados/chat/chat.component'
 import { FeedComponent } from './home/turma/feed/feed.component';
 import { EncarregadosComponent } from './home/turma/encarregados/encarregados.component';
-import { DatepickerModule } from 'angular2-material-datepicker';
+import { ProfessoresComponent } from './home/turma/professores/professores.component';
+
+import { DatepickerModule } from 'angular2-material-datepicker';    
 import { Ng2SelectModule } from 'ng2-material-select';
 
 
@@ -36,11 +41,15 @@ const appRoutes: Routes = [
 
     { path: 'login', component: LoginComponent },
     { path: 'registo', component: RegistoComponent },
+    { path: 'registo_social', component: RegistoSocialComponent },
     {
         path: 'home', component: HomeComponent,
         children: [
             {
                 path: 'turmas', component: TurmasComponent
+            },
+            {
+                path: 'perfil', component: PerfilComponent
             },
             {
                 path: 'turma/:id', component: TurmaComponent, children: [
@@ -52,6 +61,9 @@ const appRoutes: Routes = [
                     },
                     {
                         path: 'encarregados/:id', component: ChatComponent
+                    },
+                    {
+                        path: 'professores', component: ProfessoresComponent
                     }
                 ],
             }
@@ -64,12 +76,15 @@ const appRoutes: Routes = [
     declarations: [
         LoginComponent,
         RegistoComponent,
+        RegistoSocialComponent,
         AppComponent,
         HomeComponent,
+        PerfilComponent,
         TurmasComponent,
         TurmaComponent,
         ChatComponent,
         FeedComponent,
+        ProfessoresComponent,
         EncarregadosComponent
     ],
     imports: [

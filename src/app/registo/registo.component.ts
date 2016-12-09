@@ -12,20 +12,23 @@ import { User } from "./registo.interface"
 
 
 export class RegistoComponent implements OnInit {
-
-    body: any;
+    body_auth: any;
+    body_bd: any;
     erro: any;
     email: any;
     password: any;
     form: FormGroup;
     err: any;
+
     constructor(public af: AngularFire, private router: Router, private http: Http, private _fb: FormBuilder) { }
 
     ngOnInit() {
         this.form = this._fb.group({
             name: "",
             email: "",
-            password: ""
+            password: "",
+            disciplina: "",
+            codigo_turma: ""
         });
 
 
@@ -35,22 +38,35 @@ export class RegistoComponent implements OnInit {
     registar(model: User, isValid: boolean) {
 
 
-        this.body = {
-            name: model.name,
+
+        this.body_auth= {
             email: model.email,
+             password: model.password,
+
         }
 
-        this.af.auth.createUser(model).then(res => {
+        this.body_bd = {
+             email: model.email,
+             name : model.name,
+             disciplina : model.disciplina,
+             codigo_turma : model.codigo_turma
+        }
+
+        
+
+        this.af.auth.createUser(this.body_auth).then(res => {
             console.log(res);
 
 
 
 
-            this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + this.af.auth.getAuth().uid + '/.json', this.body)
+            this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + this.af.auth.getAuth().uid + '/.json', this.body_bd)
                 .map(res => res.json())
                 .subscribe(
                 data => {
                     let teste = this.af.auth.subscribe(res => {
+                        console.log(res); 
+
                         res.auth.updateProfile({
                             displayName: "professor",
                             photoURL: ""

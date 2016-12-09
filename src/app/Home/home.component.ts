@@ -13,9 +13,9 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
     teacher: any;
-    photo : any;
+    photo: any;
 
-    options : any;
+    options: any;
     constructor(private http: Http, private router: Router, private af: AngularFire) {
 
     }
@@ -25,15 +25,6 @@ export class HomeComponent implements OnInit {
         this.options = ['Definições', 'Logout']
         this.router.navigateByUrl('/home/turmas');
 
-        let teacher_obs = this.af.database.list('/professores', {
-            query: {
-                orderByKey: true,
-                equalTo: 'CKiiePZGPNQMYjUbDAW6YqIeINh1'
-            }
-        });
-        
-
-        teacher_obs.subscribe(res => { this.teacher = res[0]; console.log(this.teacher) });
 
         this.af.auth.subscribe(res => {
 
@@ -41,6 +32,16 @@ export class HomeComponent implements OnInit {
 
         });
 
-        }
+    }
+
+    logout() {
+
+        this.af.auth.subscribe(res => {
+
+            this.af.auth.logout();
+            this.router.navigateByUrl('/login');
+        });
+
+    }
 
 }

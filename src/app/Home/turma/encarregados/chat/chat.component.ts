@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Http, Headers } from '@angular/http'
 import { Router, ActivatedRoute } from '@angular/router'
-import { Subject } from 'rxjs/Subject';
 
 @Component({
     selector: 'chat',
@@ -16,22 +16,18 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     id2: any;
     chat: any;
     body: any;
+    encarregado: any;
+    professor: any;
     texto: any;
     user: any;
-    constructor(public af: AngularFire, private http: Http, private router: Router, private route: ActivatedRoute) {
-
-
-
-
-
+    form: any;
+    constructor(public af: AngularFire, private http: Http, private router: Router, private route: ActivatedRoute, public _fb: FormBuilder) {
     }
 
     @ViewChild('scrollMe') private myScrollContainer: ElementRef;
-
-
-
     ngAfterViewChecked() {
         this.scrollToBottom();
+
     }
 
     scrollToBottom(): void {
@@ -43,41 +39,55 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
 
     ngOnInit() {
+        this.form = this._fb.group({
+            texto: ["", Validators.compose([Validators.required, Validators.minLength(1)])]
+        });
+
 
         this.scrollToBottom();
-    
+
         this.sub = this.route.params.subscribe(params => {
 
-    this.id2 = params['id'] // (+) converts string 'id' to a number
-});
+            this.id2 = params['id'] // (+) converts string 'id' to a number
+       });
 
-this.chat = this.af.database.list('encarregados/' + this.id2 + '/chat');
+        this.af.auth.subscribe(res => {
 
-let user = this.af.database.object('encarregados/' + this.id2);
+        this.chat = this.af.database.list('professores/' + res.uid + '/chat/' + this.id2);
 
-user.subscribe(res => this.user = res);
+
+        });
+        let encarregado = this.af.database.object('encarregados/' + this.id2);
+
+       encarregado.subscribe(res => this.encarregado = res);
+
 
     }
 
-add() {
-
-    this.body =
-
-        {
-            from: 0,
-            mensagem: this.texto
-        }
-
-    this.http.post('https://caderneta-2b6e4.firebaseio.com/encarregados/' + this.id2 + '/chat.json', this.body)
-        .map(res => res.json())
-        .subscribe(
-        data => { this.texto = "" },
-        err =>
-            () => console.log('complete')
-        );
+    enviar(model) {
 
 
-}
+        this.body =
+
+            {
+                from: 0,
+                mensagem: model.texto
+            }
+
+        console.log(this.body)
+
+        this.af.auth.subscribe(res => {
+            this.http.post('https://caderneta-2b6e4.firebaseio.com/professores/' + res.uid + '/chat/' + this.id2 + '.json', this.body)
+                .map(res => res.json())
+                .subscribe(
+                data => { this.texto = "" },
+                err =>
+                    () => console.log('complete')
+                );
+        });
+
+
+    }
 
 
 
