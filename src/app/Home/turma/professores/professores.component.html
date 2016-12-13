@@ -1,16 +1,22 @@
 <div class="container">
-<div class="row encarregados ">
-        <div class="encarregado col-lg-3 animated fadeInUp" *ngFor="let professor of professores | async;">
-            <md-card (click)="avancar(encarregado.$key)">
-                <div class="text-center">
-                    <img [src]="professor.photoUrl" class="img-circle img-responsive img-avatar ">
-                </div>
-                <p> {{professor.name}}</p>
-                <p>  Professor de: {{professor.disciplina}}
-    
-                <button md-raised-button color="primary" style="width: 100%">Ver</button>
-            </md-card>
-        </div>
+    <div class="row encarregados ">
+        <div>
+            <div *ngFor="let professor of professores | async;">
+                <div *ngIf="professor.codigo_turmas[0] == id || professor.codigo_turmas[1] == id  || professor.codigo_turmas[2] == id || professor.codigo_turmas[3] == id || professor.codigo_turmas[4] == id || professor.codigo_turmas[5] == id || professor.codigo_turmas[6] == id">
+                    <div class="encarregado col-lg-3 animated fadeInUp">
 
+                        <md-card (click)="avancar(encarregado.$key)">
+                            <div class="text-center">
+                                <img [src]="professor.photoUrl" class="img-circle img-responsive img-avatar ">
+                            </div>
+                           
+                            <p> {{professor.name}}</p> 
+                            <p> Professor de: {{professor.disciplina}}
+
+                                <button md-raised-button color="primary" style="width: 100%">Ver</button>
+                        </md-card>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>

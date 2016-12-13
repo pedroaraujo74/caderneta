@@ -37,7 +37,7 @@ export class RegistoSocialComponent implements OnInit {
         });
 
 
-
+ 
     }
 
     registar(model: User, isValid: boolean) {
@@ -51,8 +51,8 @@ export class RegistoSocialComponent implements OnInit {
                 codigo_turma: model.codigo_turma,
                 photoUrl: res.auth.photoURL
             }
+            
             console.log(res);
-
             this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + res.uid + '/.json', this.body_bd)
                 .map(res => res.json())
                 .subscribe(

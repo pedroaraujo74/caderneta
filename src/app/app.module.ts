@@ -21,8 +21,9 @@ import { FeedComponent } from './home/turma/feed/feed.component';
 import { EncarregadosComponent } from './home/turma/encarregados/encarregados.component';
 import { ProfessoresComponent } from './home/turma/professores/professores.component';
 
-import { DatepickerModule } from 'angular2-material-datepicker';    
+import { DatepickerModule } from 'angular2-material-datepicker';
 import { Ng2SelectModule } from 'ng2-material-select';
+
 
 
 const myFirebaseConfig = {

@@ -21,13 +21,33 @@ export class ProfessoresComponent implements OnInit {
 
         });
 
+        this.af.auth.subscribe(res => {
 
-        this.professores = this.af.database.list('/professores', {
-            query: {
-                orderByChild: "codigo_turma",
-                equalTo: this.id
-            }
+            this.professores = this.af.database.list('/professores', {
+            
+            });
+
+            /*    let teste = this.af.database.list(this.professores,{
+                    query: {
+                        orderByChild: "$key",
+                        equalTo: this.id
+                    }
+    
+                });
+                */
+            let obs = this.professores.subscribe(result => {
+                console.log(result);
+                var valuesWith460 = result.filter(function (val) {
+                    return val.codigo_turmas[0] === "-KY4Jl3N103L6kNd-liQ";
+                });
+                console.log("a");
+                console.log(valuesWith460);
+
+            });
+
+
         });
 
     }
+
 }

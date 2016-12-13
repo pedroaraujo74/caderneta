@@ -33,8 +33,8 @@
 }
 
 .img-small{
-    width: 25px;
-    height: 25px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
 }
 .feed_inputs{
@@ -62,12 +62,23 @@ ng2-select{
 .feed{
        margin-left: 25%;
         margin-top: 50px;
-        
 }
+
+
+
 .articles{
         margin-left: 25%;
         margin-top: 50px;
 }
+
+@media screen and (max-width: 768px) {
+    .articles{
+       margin-left: 0% !important;
+}
+    .feed{ 
+       margin-left: 0% !important;
+}
+}   
 .card_event{
     padding: 15px;
     padding-top: 0;
@@ -81,24 +92,126 @@ ng2-select{
     border-radius: 50%;
 }
 .card_event .row{
-    margin-bottom: 10px;
+
+    margin-bottom: 10px;    
+
 }
+.cinzento{
+    color: #ccc;
+}
+.card_event p{
+    margin: 0;
+}
+
 .card_event .header p{
-    text-align: left;
-    line-height: 50px;
+   
 }
 .card_event i{
     margin-right: 5px;
 }
-.card_event .header{
-    height: 50px;
-    background: #2196F3;
-    text-align: left;
-    color: #fff;
+
+.card_roxo .header{
+ padding: 10px;
+    color:  #9340f0;
+    border-bottom: 1px solid  #9340f0;
     text-transform: uppercase;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
 }
+
+.card_roxo .disciplina{
+    padding: 3px 5px 3px 5px;
+    border-radius: 5px;
+    background:  #9340f0;
+    color: #fff;
+    text-align: center;
+}
+
+.card_roxo .footer{
+    color: #9340f0;
+}
+
+
+
+.card_amarelo .header{
+     padding: 10px;
+    color:  #FFCB2B;
+    border-bottom: 1px solid  #FFCB2B;
+    text-transform: uppercase;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.card_amarelo .disciplina{
+    padding: 3px 5px 3px 5px;
+    border-radius: 5px;
+    background:   #FFCB2B;
+    color: #fff;
+    text-align: center;
+}
+
+.card_amarelo .footer{
+    color:  #FFCB2B;
+}
+
+.body{
+   color: rgba(0,0,0, 0.7);
+}
+
+.disciplina{
+    margin-top: 14px;
+}
+md-card{
+    margin: 0 auto;
+}
+.card_vermelho .header{
+     padding: 10px;
+    color:  #f53d3d;
+    border-bottom: 1px solid  #f53d3d;
+    text-transform: uppercase;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.card_vermelho .disciplina{
+    padding: 3px 5px 3px 5px;
+    border-radius: 5px;
+    background:   #f53d3d;
+    color: #fff;
+    text-align: center;
+}
+
+.card_vermelho .footer{
+    color:  #f53d3d;
+}
+
+.card_verde .header{
+    padding: 10px;
+    color:  #38dc5f;
+    border-bottom: 1px solid  #38dc5f;
+    text-transform: uppercase;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.card_verde .disciplina{
+    padding: 3px 5px 3px 5px;
+    border-radius: 5px;
+    background:  #38dc5f;
+    color: #fff;
+    text-align: center;
+}
+
+.card_verde .footer{
+    color: #38dc5f;
+}
+.card_event .footer{
+    height: 25px;
+        position: absolute;
+    bottom: 0;
+    padding: 0px 0px 5px 18px;
+}
+
 
 .imagem1{
     background-image: url('https://lh3.googleusercontent.com/-nv5bsmoh1qE/VE0Q4icLZ9I/AAAAAAAAMLo/W3IaMYoWj4Q/w1366-h768/image.jpg%252822%2529.png');

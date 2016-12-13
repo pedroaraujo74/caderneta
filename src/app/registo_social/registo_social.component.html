@@ -24,6 +24,8 @@
 
 <form [formGroup]="form" novalidate (ngSubmit)="registar(form.value, form.valid)">
 
+  <h3>Registo</h3>
+
   <md-input placeholder="{{name}}" formControlName="name"> </md-input>
 
   <md-input placeholder="{{email}}" formControlName="email"></md-input>

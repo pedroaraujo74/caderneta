@@ -11,7 +11,7 @@
 
 .container{
   position: relative;
-  top: 100px;
+  top: 175px;
 }
 .container-fluid{
       position: relative;
@@ -22,7 +22,14 @@
     overflow-x: hidden;
     /* overflow: scroll; */
     overflow-y: scroll;
-    padding: 40px;
+    padding: 40px;  
+  
+}
+
+.horas{
+    position: relative;
+    color: #aaa;
+    top: 25px;
 }
 
 .img-avatar{
@@ -38,6 +45,7 @@
     border-radius: 50%;
     float:left;
     margin-right: 10px;
+    object-fit: cover;
 }
 .perfil_container{
     border-right:1px solid #ccc;

@@ -28,7 +28,6 @@ export class RegistoComponent implements OnInit {
             email: "",
             password: "",
             disciplina: "",
-            codigo_turma: ""
         });
 
 
@@ -49,15 +48,12 @@ export class RegistoComponent implements OnInit {
              email: model.email,
              name : model.name,
              disciplina : model.disciplina,
-             codigo_turma : model.codigo_turma
         }
 
         
 
         this.af.auth.createUser(this.body_auth).then(res => {
             console.log(res);
-
-
 
 
             this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + this.af.auth.getAuth().uid + '/.json', this.body_bd)

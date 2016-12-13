@@ -49,17 +49,16 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         this.sub = this.route.params.subscribe(params => {
 
             this.id2 = params['id'] // (+) converts string 'id' to a number
-       });
+        });
 
         this.af.auth.subscribe(res => {
 
-        this.chat = this.af.database.list('professores/' + res.uid + '/chat/' + this.id2);
-
+            this.chat = this.af.database.list('professores/' + res.uid + '/chat/' + this.id2);
 
         });
         let encarregado = this.af.database.object('encarregados/' + this.id2);
 
-       encarregado.subscribe(res => this.encarregado = res);
+        encarregado.subscribe(res => this.encarregado = res);
 
 
     }
@@ -85,11 +84,5 @@ export class ChatComponent implements OnInit, AfterViewChecked {
                     () => console.log('complete')
                 );
         });
-
-
     }
-
-
-
-
 }

@@ -1,0 +1,28 @@
+.perfil-card{
+    height: 300px;
+}
+
+.perfil{
+    margin-top: 3%;
+}
+p{
+    font-size: 1.2em;
+}
+img{
+    position: relative;
+    top: 96px;
+    width: 150px;
+    display: inline;
+    z-index: 1;
+    border: 3px solid #2196F3;
+}
+.perfil-card h1{
+    margin-top: 60px;   
+}
+.info{
+    margin-top: 25px;
+}
+
+.labels{
+    text-transform: uppercase;
+}

@@ -44,8 +44,12 @@
                   <div *ngFor="let mensagem of chat | async">
                         <div class="row" style="margin-top: 10px;">
 
-                              <div *ngIf="mensagem.from == 0" class="balao" style="background: #2196F3; color: white; float: right;">
-                                    {{mensagem?.mensagem}}
+                              <div *ngIf="mensagem.from == 0">
+
+                                    <div class="balao" style="background: #2196F3; color: white; float: right;">
+                                          {{mensagem?.mensagem}}
+                                    </div>
+
                               </div>
                         </div>
                         <div class="row" style="margin-top: 10px;">

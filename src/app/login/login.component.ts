@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
             password: ""
         });
 
-        this.af.auth.subscribe(auth => console.log(auth));
     }
 
 
@@ -57,7 +56,7 @@ export class LoginComponent implements OnInit {
 
         this.af.auth.login({
             provider: AuthProviders.Google,
-            method: AuthMethods.Popup
+            method: AuthMethods.Redirect
         }).then(res => {
 
             this.http.get('https://caderneta-2b6e4.firebaseio.com/professores/' + res.auth.uid + '.json')
@@ -74,6 +73,26 @@ export class LoginComponent implements OnInit {
         })
 
 
+    }
+
+    loginFacebook() {
+
+        this.af.auth.login({
+            provider: AuthProviders.Facebook,
+            method: AuthMethods.Redirect
+        }).then(res => {
+            this.http.get('https://caderneta-2b6e4.firebaseio.com/professores/' + res.auth.uid + '.json')
+                .subscribe(data => {
+                    console.log(data.json);
+                    if (data.json() == null) {
+                        this.router.navigate(['/registo_social'])
+                    } else {
+                        this.router.navigate(['/home/turmas'])
+                    }
+
+                });
+
+        })
     }
 
     registar() {

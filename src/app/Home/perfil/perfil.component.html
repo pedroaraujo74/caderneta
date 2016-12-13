@@ -2,7 +2,29 @@
 </router-outlet>
 
 <div class="container">
-    <h1>Perfil</h1>
+
+    <div class="row perfil">
 
 
-</div>
+        <div class="col-lg-9 col-lg-offset-2 col-xs-12" style="text-align: center">
+            <div class="row">
+                <img [src]="professor?.photoUrl" class="img-responsive img-circle">
+            </div>
+            <div class="row">
+                <md-card class="perfil-card">
+                    <h1>{{professor?.name}}</h1>
+                    <h4>Professor de {{professor?.disciplina}}</h4>
+
+                    <div class="row info">
+                        <div class="col-lg-4 col-lg-offset-2 col-xs-2">
+                            <p class="labels">Email: </p>
+                        </div>
+                        <div class="col-lg-6 col-xs-10 ">
+                            <p class="pull-left"> {{professor?.email}} </p>
+                        </div>
+                    </div>
+                </md-card>
+            </div>
+
+        </div>
+    </div>

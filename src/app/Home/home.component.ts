@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
     teacher: any;
     photo: any;
-
+    user: any;
     options: any;
     constructor(private http: Http, private router: Router, private af: AngularFire) {
 
@@ -28,7 +28,12 @@ export class HomeComponent implements OnInit {
 
         this.af.auth.subscribe(res => {
 
-            this.photo = res.auth.photoURL;
+            this.user = res;
+            this.http.get('https://caderneta-2b6e4.firebaseio.com/professores/' + this.user.uid + '.json')
+                .map(res => res).subscribe(data => {
+                    this.teacher = data.json();
+                    this.photo = this.teacher.photoUrl;
+                });
 
         });
 
@@ -38,8 +43,9 @@ export class HomeComponent implements OnInit {
 
         this.af.auth.subscribe(res => {
 
-            this.af.auth.logout();
+
             this.router.navigateByUrl('/login');
+            this.af.auth.logout();
         });
 
     }

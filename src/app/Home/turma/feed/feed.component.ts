@@ -21,15 +21,10 @@ export class FeedComponent implements OnInit {
     photo: any;
     searchMode: boolean = false;
     insertMode: boolean = false;
-    options =
-    ['português', "inglês"];
+
     constructor(private af: AngularFire, private route: ActivatedRoute, private _fb: FormBuilder, private http: Http) { }
 
     ngOnInit() {
-
-
-
-
 
         this.search = 0;
         this.form = this._fb.group({
@@ -67,7 +62,7 @@ export class FeedComponent implements OnInit {
                     this.body = {
                         title: model.title,
                         desc: model.desc,
-                        eventDate: model.desc,
+                        eventDate: this.date,
                         dateCreation: Date.now(),
                         type: 0,
                         disciplina: this.teacher.disciplina,

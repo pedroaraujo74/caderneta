@@ -24,16 +24,15 @@
 
 <form [formGroup]="form" novalidate (ngSubmit)="registar(form.value, form.valid)">
 
+  <h3>Registo</h3>
+
   <md-input placeholder="Nome" formControlName="name"></md-input>
 
   <md-input placeholder="Email" formControlName="email"></md-input>
 
   <md-input placeholder="password" type="password" formControlName="password"></md-input>
 
-  <md-input placeholder="Professor de" type="text" formControlName="disciplina"></md-input>
-
-  <md-input placeholder="Codigo da Disciplina" type="text" formControlName="codigo_turma"></md-input>
-
+  <md-input placeholder="Disciplina Lecionada" type="text" formControlName="disciplina"></md-input>
 
   <button md-raised-button color="primary" type="submit">Registar</button>
 

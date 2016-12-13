@@ -24,13 +24,33 @@
 -->
 
 
- <form [formGroup]="form" novalidate (ngSubmit)="login(form.value, form.valid)">
-    <md-input placeholder="Email" formControlName="email"></md-input>
+<form [formGroup]="form" novalidate (ngSubmit)="login(form.value, form.valid)">
+    <h3>Login</h3>
+    <div class="row">
 
-    <md-input placeholder="password" type="password" formControlName="password"></md-input>
+        <div class="col-lg-6">
 
-    <button md-raised-button color="primary" type="button" (click)="loginGoogle()">Login Com Google</button>
-    <button md-raised-button color="primary" type="submit">Login</button>
-    <button md-raised-button color="primary" type="button" (click)="registar()">Registar Novo Professor</button>
-    {{err}}
+            <md-input placeholder="Email" formControlName="email"></md-input>
+
+            <md-input placeholder="password" type="password" formControlName="password"></md-input>
+
+            <button md-raised-button color="primary" type="submit">Login</button>
+
+        </div>
+        <div class="col-lg-6" style="margin-top: 31px;">
+
+            <button class="loginBtn loginBtn--facebook" (click)="loginFacebook()">
+  Login com Facebook
+</button>
+
+            <button class="loginBtn loginBtn--google" (click)="loginGoogle()">
+  Login com Google
+</button>
+
+
+        </div>
+    </div>
+    <div class="row">
+        <button md-raised-button color="primary" type="button" (click)="registar()" style="float:right">Registar Novo Professor</button>        {{err}}
+    </div>
 </form>

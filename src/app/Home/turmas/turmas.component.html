@@ -2,18 +2,51 @@
 </router-outlet>
 
 <div class="container">
-    <h1>Bem-Vindo <span *ngIf="teacher?.codigo_turma == undefined">Diretor de Turma</span> {{teacher?.name}}</h1>
-    <p *ngIf="!disciplinas">
+
+    <div *ngIf="mensagem" class="alert alert-success animated fadeIn">
+        <strong>Successo!</strong> {{mensagem}}
+    </div>
+    <div *ngIf="erro" class="alert alert-danger animated fadeIn">
+        <strong>Erro!</strong> {{erro}}
+    </div>
+
+
+    <h1>Bem-Vindo {{teacher?.name}}</h1>
+    <h3>Listagem de Turmas</h3>
+
+    <p *ngIf="!item">
         <md-progress-circle mode="indeterminate" color="primary"></md-progress-circle>
     </p>
-    <md-card *ngFor="let disciplina of disciplinas | async; let i = index; " (click)='goto(disciplina.$key)'>
-        {{disciplina.nome}}
-    </md-card>
+    <div class="row">
+        <div class="col-lg-6" *ngFor="let turma of item; let i = index;">
+            <md-card class="animated fadeIn" (click)='goto(turma[0].$key)' style="cursor: pointer">
+                {{turma[0]?.nome}}
+            </md-card>
+        </div>
+    </div>
 
 
-    <md-input placeholder="Nome" [(ngModel)]="class_name">
-    </md-input>
 
-    <button md-raised-button color="primary" (click)="add()">Adicionar Turma</button>
+    <h3>Operações</h3>
+    <div class="row">
+        <div class="col-lg-12">
+            <md-card>
+                <h4>Se desejar adicionar uma nova turma insira o seu nome</h4>
+                <md-input placeholder="Nome" [(ngModel)]="class_name"></md-input>
+                <button md-raised-button color="primary"  (click)="add()">Adicionar Turma</button>
+                
+            </md-card>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <md-card>
+                <h4>Se desejar associar-se a uma turma já existente insira o código fornecido pelo professor</h4>
+                <md-input placeholder="Codigo Turma" [(ngModel)]="class_name1"></md-input>
+                <button md-raised-button color="primary" (click)="associar()">Associar</button>
+            </md-card>
+        </div>
+    </div>
 
 </div>

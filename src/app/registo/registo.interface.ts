@@ -3,5 +3,4 @@ export interface User {
   email: string;
   password: string;
   disciplina: string;
-  codigo_turma? : string;
 }

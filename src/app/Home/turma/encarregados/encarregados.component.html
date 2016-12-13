@@ -1,16 +1,19 @@
 <div class="container">
     <div class="row encarregados ">
-        <div class="encarregado col-lg-3 animated fadeInUp" *ngFor="let encarregado of disciplina | async;">
-            <md-card (click)="avancar(encarregado.$key)">
+
+        <h2 *ngIf="encarregados == null"> Teste </h2>
+        <div class="encarregado col-lg-3 animated fadeInUp" *ngFor="let encarregado of encarregados | async">
+            <md-card>
                 <div class="text-center">
                     <img [src]="encarregado.photoUrl" class="img-circle img-responsive img-avatar ">
                 </div>
+                        
                 <p> {{encarregado.firstName}} {{encarregado.lastName}} </p>
                 <p> <strong>Pai de: </strong> {{encarregado.filho}}</p>
+                <p>Notificacao </p>
 
-                <button md-raised-button color="primary" style="width: 100%" (click)="avancar(encarregado.$key)">Ver</button>
+                <button md-raised-button color="primary" style="width: 100%" (click)="avancar(encarregado?.$key)">Ver</button>
             </md-card>
         </div>
-
     </div>
 </div>
