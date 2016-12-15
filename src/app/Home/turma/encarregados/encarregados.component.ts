@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable } from "rxjs/Rx";
-
+import 'rxjs/add/operator/mergeMap'
 @Component({
 
     selector: 'encarregados',
@@ -17,21 +17,24 @@ export class EncarregadosComponent implements OnInit {
     sub: any;
     chat: any;
     id: any;
+    _encarregados: any;
     teste: any;
     result: any;
-
     encarregados: any;
     notificacoes: any;
 
-
+    isVisible: any = true;
     constructor(private af: AngularFire, private route: ActivatedRoute, private router: Router, private http: Http) { }
 
     ngOnInit() {
 
+        setTimeout(() => {
+            this.isVisible = false;
+        }, 1500);
 
         this.sub = this.route.parent.params.subscribe(params => {
             this.id = params['id']; // (+) converts string 'id' to a number
-
+            this.isVisible = true;
         });
 
         this.af.auth.subscribe(auth => {
@@ -42,47 +45,34 @@ export class EncarregadosComponent implements OnInit {
                     equalTo: this.id
                 }
             })
-            
 
-            /*
-                let obs = this.disciplina.subscribe(res => {
-            
-                            for (var i in res) {
-            
-                                this.chat = this.af.database.list('professores/' + auth.uid + '/chat/' + res[i].$key, {
-            
-                                    query:{
-                                        orderByKey:true,
-                                        equalTo: "notificacao"
-                                    }
-                                })
-                                    .subscribe(result => {
-            
-            
-                                        console.log(res[i].$key + "   " + result[0].$value;
-            
-            
-                                        for (var x = 0; x < res.length; x++) {
-                                           
-                                         res[x]["notificacao"] = result["0"].$value
-                                            this.teste = res;
-                                        }
-                                        console.log(this.teste);
-            
-                                    });
-            
-            
-            
-                            }
-            
-                        });
-             */
+
+
+            let obs = this.encarregados.subscribe(res => {
+
+                for (let i = 0; i < res.length; i++) {
+
+                    this.http.get('https://caderneta-2b6e4.firebaseio.com/professores/' + auth.uid + '/chat/' + res[i].$key + '/notificacao.json').subscribe(resultado => {
+
+
+                        res[i]["notificacao"] = resultado.json();
+                        console.log(res);
+                        this.teste = res;
+
+
+
+                    });
+
+
+                }
+                this._encarregados = res;
+
+
+            });
+
         });
 
-
     }
-
-
 
 
 
@@ -90,6 +80,8 @@ export class EncarregadosComponent implements OnInit {
         this.router.navigate(['home/turma/' + this.id + '/encarregados/', id]);
 
     }
+
+
 
 
 

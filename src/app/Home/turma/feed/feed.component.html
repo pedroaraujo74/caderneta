@@ -1,57 +1,19 @@
-<div class="container-fluid">
-    <div class="col-lg-2 sidemenu md-elevation-z1 hidden-xs">
-        <div class="content">
-            <div class="header">
-                <h3><i class="fa fa-filter" aria-hidden="true" style="margin-right: 10px"></i>Filtros</h3>
-
-            </div>
-            <div class="body">
-
-
-                <p> Filtragem </p>
-                <ul class="checkboxes">
-                    <li>
-                        <md-checkbox checked="false">
-                            Apenas eventos para hoje
-                        </md-checkbox>
-                    </li>
-                    <li>
-                        <md-checkbox checked="false">
-                            Apenas Trabalhos de Casa
-                        </md-checkbox>
-                    </li>
-
-                    <li>
-                        <md-checkbox checked="false">
-                            Apenas Visitas de Estudo
-                        </md-checkbox>
-                    </li>
-                </ul>
-
-                <p> Ordenação </p>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-lg-8 col-xs-12 feed animated fadeInDown" *ngIf="insertMode">
+<div class="container">
+    <div class="feed animated fadeInDown" *ngIf="insertMode">
 
         <div class="col-lg-12">
-
-
-
 
             <form [formGroup]="form" novalidate (ngSubmit)="addEvent(form.value, form.valid)">
                 <md-card class="eventCard row">
 
                     <div class="row">
-
-
+                        <div class="col-lg-12">
+                            <md-input placeholder="Titulo" formControlName="title"></md-input>
+                        </div>
                         <div class="col-lg-12">
                             <md-input placeholder="Descrição" formControlName="desc" class="descricao"></md-input>
                         </div>
-                        <span> Titulo </span>
-                        <md-input placeholder="Titulo" formControlName="title"></md-input>
+
                     </div>
 
                     <div class="row">
@@ -67,8 +29,11 @@
                     <div class="row">
                         <div class="col-lg-8 tipos_inputs">
                             <md-radio-group formControlName="type">
-                                <md-radio-button value="0">Trabalho de Casa</md-radio-button>
-                                <md-radio-button value="1">Evento</md-radio-button>
+                                <md-radio-button value="1">Sumário</md-radio-button>
+                                <md-radio-button value="2">TPC</md-radio-button>
+                                <md-radio-button value="3">Eventos</md-radio-button>
+                                <md-radio-button value="4">Avisos</md-radio-button>
+
                             </md-radio-group>
                         </div>
                         <div class="col-lg-2">
@@ -85,20 +50,34 @@
     </div>
 
     <div *ngIf="feed == undefined">
-            <md-progress-circle mode="indeterminate" color="primary"></md-progress-circle>
+        <md-progress-circle mode="indeterminate" color="primary"></md-progress-circle>
+    </div>
+
+    <div style="margin-top:50px">
+        <div class="row">
+            <div class="col-lg-12" style="text-align:center; padding: 4%;">
+
+                <h4 style="margin-left: 12px;">Filtrar por: </h4>
+                <md-radio-group [(ngModel)]="filtro" style="margin-bottom:25px;">
+                    <md-radio-button value="0">Todos</md-radio-button>
+                    <md-radio-button value="1">Sumário</md-radio-button>
+                    <md-radio-button value="2">TPC</md-radio-button>
+                    <md-radio-button value="3">Eventos</md-radio-button>
+                    <md-radio-button value="4">Avisos</md-radio-button>
+
+                </md-radio-group>
+
+            </div>
         </div>
 
-    <div class="col-lg-8 col-xs-12 articles ">
-
-        
         <div *ngFor="let article of feed | async;">
-            
-            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 1">
+
+            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 1 && filtro == 1 || filtro == 0">
                 <md-card class="card_event card_verde">
 
                     <div class="row header">
                         <div class="col-lg-3" style="text-align: left; margin-top:7px;">
-                            <img [src]="article.photoUrl" class="img-responsive img-small" style="display:inline; margin-right: 10px;">
+                            <img [src]="article.photoUrl" class="img-small" style="display:inline; object-fit:cover; margin-right: 10px;">
                         </div>
                         <div class="col-lg-6" style="text-align:left; margin-top:10px;">
                             <p>{{article.disciplina}}</p>
@@ -116,16 +95,16 @@
                         </div>
                     </div>
                     <div class="row footer">
-                        <p> <i class="fa fa-calendar"></i>Entrega até {{article.eventDate | date}}</p>
+                        <p> <i class="fa fa-calendar"></i>Data: {{article.eventDate | date}}<i style="float:right" class="fa fa-trash"></i></p>
                     </div>
                 </md-card>
             </div>
-            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 2">
+            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 2 && filtro == 2 || filtro == 0">
                 <md-card class="card_event card_roxo">
 
                     <div class="row header">
                         <div class="col-lg-3" style="text-align: left; margin-top:7px;">
-                            <img [src]="article.photoUrl" class="img-responsive img-small" style="display:inline; margin-right: 10px;">
+                            <img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
                         </div>
                         <div class="col-lg-6" style="text-align:left; margin-top:10px;">
                             <p>{{article.disciplina}}</p>
@@ -147,12 +126,12 @@
                     </div>
                 </md-card>
             </div>
-            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 3">
+            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 3 && filtro == 3 || filtro == 0">
                 <md-card class="card_event card_amarelo">
 
                     <div class="row header">
-                        <div class="col-lg-3"  style="text-align: left; margin-top:7px;">
-                            <img [src]="article.photoUrl" class="img-responsive img-small" style="display:inline; margin-right: 10px;">
+                        <div class="col-lg-3" style="text-align: left; margin-top:7px;">
+                            <img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
                         </div>
                         <div class="col-lg-6" style="text-align:left; margin-top:10px;">
                             <p>{{article.disciplina}}</p>
@@ -174,14 +153,14 @@
                 </md-card>
             </div>
 
-            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 4">
+            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 4 && filtro == 4 || filtro == 0">
                 <md-card class="card_event card_vermelho">
 
                     <div class="row header">
                         <div class="col-lg-3" style="text-align: left; margin-top:7px;">
-                            <img [src]="article.photoUrl" class="img-responsive img-small" style="display:inline; margin-right: 10px;">
+                            <img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
                         </div>
-                        <div class="col-lg-6"  style="text-align:left; margin-top:10px;">
+                        <div class="col-lg-6" style="text-align:left; margin-top:10px;">
                             <p>{{article.disciplina}}</p>
                             <p class="cinzento">{{article.createdBy}}</p>
                         </div>
@@ -196,7 +175,7 @@
                         </div>
                     </div>
                     <div class="row footer">
-                        <p> <i class="fa fa-calendar"></i>Entrega até {{article.eventDate | date}}</p>
+                        <p> <i class="fa fa-calendar"></i>Data {{article.eventDate | date}}</p>
                     </div>
                 </md-card>
             </div>

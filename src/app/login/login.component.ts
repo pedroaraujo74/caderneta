@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
         this.af.auth.login(model).then(res => {
 
             this.af.auth.subscribe(res => {
+                console.log(res);
                 if (res.auth.displayName == "professor") {
                     this.router.navigate(['/home/turmas'])
                 } else {
@@ -56,9 +57,8 @@ export class LoginComponent implements OnInit {
 
         this.af.auth.login({
             provider: AuthProviders.Google,
-            method: AuthMethods.Redirect
+            method: AuthMethods.Popup
         }).then(res => {
-
             this.http.get('https://caderneta-2b6e4.firebaseio.com/professores/' + res.auth.uid + '.json')
                 .subscribe(data => {
                     console.log(data.json);
@@ -67,11 +67,8 @@ export class LoginComponent implements OnInit {
                     } else {
                         this.router.navigate(['/home/turmas'])
                     }
-
                 });
-
         })
-
 
     }
 

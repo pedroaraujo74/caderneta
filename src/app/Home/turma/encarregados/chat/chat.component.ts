@@ -39,6 +39,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
 
     ngOnInit() {
+
+
         this.form = this._fb.group({
             texto: ["", Validators.compose([Validators.required, Validators.minLength(1)])]
         });
@@ -53,36 +55,41 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
         this.af.auth.subscribe(res => {
 
+            let notificacao = {
+                notificacao: false
+            }
+
+            this.http.patch('https://caderneta-2b6e4.firebaseio.com/professores/' + res.uid + '/chat/' + this.id2 + '.json', notificacao).subscribe(result => console.log(result));
+
             this.chat = this.af.database.list('professores/' + res.uid + '/chat/' + this.id2);
 
+
+            let encarregado = this.af.database.object('encarregados/' + this.id2);
+
+            encarregado.subscribe(res => this.encarregado = res);
+
+
         });
-        let encarregado = this.af.database.object('encarregados/' + this.id2);
-
-        encarregado.subscribe(res => this.encarregado = res);
-
-
     }
 
     enviar(model) {
 
 
-        this.body =
-
-            {
-                from: 0,
-                mensagem: model.texto
-            }
+                this.body = {
+                    from: 0,
+                    mensagem: model.texto
+                }
 
         console.log(this.body)
 
         this.af.auth.subscribe(res => {
-            this.http.post('https://caderneta-2b6e4.firebaseio.com/professores/' + res.uid + '/chat/' + this.id2 + '.json', this.body)
-                .map(res => res.json())
-                .subscribe(
-                data => { this.texto = "" },
-                err =>
-                    () => console.log('complete')
-                );
-        });
-    }
+                    this.http.post('https://caderneta-2b6e4.firebaseio.com/professores/' + res.uid + '/chat/' + this.id2 + '.json', this.body)
+                        .map(res => res.json())
+                        .subscribe(
+                        data => { this.texto = "" },
+                        err =>
+                            () => console.log('complete')
+                        );
+                });
+            }
 }

@@ -10,7 +10,7 @@ import { Router } from '@angular/router'
 
 export class TurmasComponent implements OnInit {
 
-    
+
     body: any;
     user: any;
     erro: any;
@@ -30,9 +30,9 @@ export class TurmasComponent implements OnInit {
 
         this.af.auth.subscribe(res => {
 
-            console.log(res);
+
             this.user = res;
-            console.log(this.user.uid);
+
 
             this.http.get('https://caderneta-2b6e4.firebaseio.com/professores/' + this.user.uid + '.json').subscribe(data => {
                 this.teacher = data.json();
@@ -45,7 +45,7 @@ export class TurmasComponent implements OnInit {
 
             this.http.get('https://caderneta-2b6e4.firebaseio.com/professores/' + this.user.uid + '/codigo_turmas.json').subscribe(data => {
                 this.turmas = data.json();
-                console.log(this.turmas);
+
                 for (let i = 0; i < this.turmas.length; i++) {
                     this.disciplinas = this.af.database.list('/turmas/', {
                         query: {
@@ -61,9 +61,6 @@ export class TurmasComponent implements OnInit {
             });
 
 
-
-
-            console.log(this.item);
 
 
             /*this.disciplinas = this.af.database.list('/turmas/' + res.auth.uid, {

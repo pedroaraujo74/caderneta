@@ -15,6 +15,7 @@ export class FeedComponent implements OnInit {
     date: any;
     id: string;
     body: any;
+    filtro: any;
     feed: any;
     teacher: any;
     search: any;
@@ -25,6 +26,8 @@ export class FeedComponent implements OnInit {
     constructor(private af: AngularFire, private route: ActivatedRoute, private _fb: FormBuilder, private http: Http) { }
 
     ngOnInit() {
+
+        this.filtro = 0;
 
         this.search = 0;
         this.form = this._fb.group({
@@ -39,7 +42,12 @@ export class FeedComponent implements OnInit {
             this.id = params['id']; // (+) converts string 'id' to a number
         });
 
-        this.feed = this.af.database.list('turmas/' + this.id + '/feed');
+        this.feed = this.af.database.list('turmas/' + this.id + '/feed', {
+            query: {
+                orderByChild: "eventDate"
+
+            }
+        });
 
         this.af.auth.subscribe(res => {
 
@@ -64,12 +72,11 @@ export class FeedComponent implements OnInit {
                         desc: model.desc,
                         eventDate: this.date,
                         dateCreation: Date.now(),
-                        type: 0,
+                        type: model.type,
                         disciplina: this.teacher.disciplina,
                         createdBy: this.teacher.name,
                         photoUrl: this.teacher.photoUrl
                     }
-
 
                     this.http.post('https://caderneta-2b6e4.firebaseio.com/turmas/' + this.id + '/feed.json', this.body)
                         .map(res => res.json())

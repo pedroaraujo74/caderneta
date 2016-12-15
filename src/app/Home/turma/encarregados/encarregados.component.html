@@ -1,17 +1,20 @@
 <div class="container">
-    <div class="row encarregados ">
+
+    <md-progress-circle mode="indeterminate" *ngIf="isVisible == true"></md-progress-circle>
+
+    <div class="row encarregados " *ngIf="isVisible == false">
 
         <h2 *ngIf="encarregados == null"> Teste </h2>
-        <div class="encarregado col-lg-3 animated fadeInUp" *ngFor="let encarregado of encarregados | async">
+        <div class="encarregado col-lg-3" *ngFor="let encarregado of _encarregados">
             <md-card>
                 <div class="text-center">
                     <img [src]="encarregado.photoUrl" class="img-circle img-responsive img-avatar ">
                 </div>
-                        
-                <p> {{encarregado.firstName}} {{encarregado.lastName}} </p>
+                <i *ngIf="encarregado.notificacao == undefined" class="fa fa-bell" style="color: #ccc"></i>
+                <i *ngIf="encarregado.notificacao == true" class="fa fa-bell" style="color: red"></i>
+                <i *ngIf="encarregado.notificacao == false" class="fa fa-bell" style="color: #ccc"></i>
+                <h4> {{encarregado.name}}</h4>
                 <p> <strong>Pai de: </strong> {{encarregado.filho}}</p>
-                <p>Notificacao </p>
-
                 <button md-raised-button color="primary" style="width: 100%" (click)="avancar(encarregado?.$key)">Ver</button>
             </md-card>
         </div>
