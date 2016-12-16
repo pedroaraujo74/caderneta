@@ -52,7 +52,7 @@ export class EncarregadosComponent implements OnInit {
 
                 for (let i = 0; i < res.length; i++) {
 
-                    this.http.get('https://caderneta-2b6e4.firebaseio.com/professores/' + auth.uid + '/chat/' + res[i].$key + '/notificacao.json').subscribe(resultado => {
+                    this.http.get('https://caderneta-2b6e4.firebaseio.com/professores/' + auth.uid + '/chat/' + res[i].$key + '/notificacao_prof.json').subscribe(resultado => {
 
 
                         res[i]["notificacao"] = resultado.json();

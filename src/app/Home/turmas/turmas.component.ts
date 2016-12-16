@@ -50,7 +50,8 @@ export class TurmasComponent implements OnInit {
                     this.disciplinas = this.af.database.list('/turmas/', {
                         query: {
                             orderByKey: true,
-                            equalTo: this.turmas[i]
+                            equalTo: this.turmas[i],
+                            
                         }
                     })
 

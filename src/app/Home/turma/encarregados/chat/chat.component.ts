@@ -10,7 +10,6 @@ import { Router, ActivatedRoute } from '@angular/router'
     styleUrls: ['chat.css']
 })
 
-
 export class ChatComponent implements OnInit, AfterViewChecked {
     sub: any;
     id2: any;
@@ -56,7 +55,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         this.af.auth.subscribe(res => {
 
             let notificacao = {
-                notificacao: false
+                notificacao_prof: false
             }
 
             this.http.patch('https://caderneta-2b6e4.firebaseio.com/professores/' + res.uid + '/chat/' + this.id2 + '.json', notificacao).subscribe(result => console.log(result));
@@ -72,24 +71,50 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         });
     }
 
+    addZero(i) {
+
+
+      if (i < 10) {
+          i = "0" + i;
+      }
+      return i;
+  }
+
     enviar(model) {
 
+        var d = new Date();
+        var h = this.addZero(d.getHours());
+        var m = this.addZero(d.getMinutes());
 
-                this.body = {
-                    from: 0,
-                    mensagem: model.texto
-                }
+
+
+        let hora = h + ":" + m;
+
+        this.body = {
+            from: 0,
+            mensagem: model.texto,
+            data: hora
+        }
 
         console.log(this.body)
 
         this.af.auth.subscribe(res => {
-                    this.http.post('https://caderneta-2b6e4.firebaseio.com/professores/' + res.uid + '/chat/' + this.id2 + '.json', this.body)
-                        .map(res => res.json())
-                        .subscribe(
-                        data => { this.texto = "" },
-                        err =>
-                            () => console.log('complete')
-                        );
-                });
-            }
+            this.http.post('https://caderneta-2b6e4.firebaseio.com/professores/' + res.uid + '/chat/' + this.id2 + '.json', this.body)
+                .map(res => res.json())
+                .subscribe(
+                data => {
+                    this.texto = ""
+
+                    let notificacao = {
+                        notificacao_enc: true
+                    }
+
+                    this.http.patch('https://caderneta-2b6e4.firebaseio.com/professores/' + res.uid + '/chat/' + this.id2 + '.json', notificacao).subscribe(result => console.log(result));
+                },
+                err =>
+                    () => console.log('complete')
+                );
+        });
+    }
 }
+    

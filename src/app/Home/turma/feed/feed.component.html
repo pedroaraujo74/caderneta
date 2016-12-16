@@ -72,7 +72,124 @@
 
         <div *ngFor="let article of feed | async;">
 
-            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 1 && filtro == 1 || filtro == 0">
+
+            <div *ngIf="filtro == 0">
+                <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 1">
+                    <md-card class="card_event card_verde">
+
+                        <div class="row header">
+                            <div class="col-lg-3" style="text-align: left; margin-top:7px;">
+                                <img [src]="article.photoUrl" class="img-small" style="display:inline; object-fit:cover; margin-right: 10px;">
+                            </div>
+                            <div class="col-lg-6" style="text-align:left; margin-top:10px;">
+                                <p>{{article.disciplina}}</p>
+                                <p class="cinzento">{{article.createdBy}}</p>
+                            </div>
+                            <div class="col-lg-3 disciplina">
+                                <p>Sumário</p>
+                            </div>
+
+                        </div>
+
+                        <div class="row body">
+                            <div class="col-lg-12" style="text-align: left">
+                                <p>{{article.desc}}</p>
+                            </div>
+                        </div>
+                        <div class="row footer">
+                            <p> <i class="fa fa-calendar"></i>Data: {{article.eventDate | date}}<i style="float:right" class="fa fa-trash"></i></p>
+                        </div>
+                    </md-card>
+                </div>
+                <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 2">
+                    <md-card class="card_event card_roxo">
+
+                        <div class="row header">
+                            <div class="col-lg-3" style="text-align: left; margin-top:7px;">
+                                <img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
+                            </div>
+                            <div class="col-lg-6" style="text-align:left; margin-top:10px;">
+                                <p>{{article.disciplina}}</p>
+                                <p class="cinzento">{{article.createdBy}}</p>
+                            </div>
+                            <div class="col-lg-3 disciplina">
+                                <p>TPC</p>
+                            </div>
+
+                        </div>
+
+                        <div class="row body">
+                            <div class="col-lg-12" style="text-align: left">
+                                <p>{{article.desc}}</p>
+                            </div>
+                        </div>
+                        <div class="row footer">
+                            <p> <i class="fa fa-calendar"></i>Entrega até {{article.eventDate | date}}</p>
+                        </div>
+                    </md-card>
+                </div>
+                <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 3">
+                    <md-card class="card_event card_amarelo">
+
+                        <div class="row header">
+                            <div class="col-lg-3" style="text-align: left; margin-top:7px;">
+                                <img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
+                            </div>
+                            <div class="col-lg-6" style="text-align:left; margin-top:10px;">
+                                <p>{{article.disciplina}}</p>
+                                <p class="cinzento">{{article.createdBy}}</p>
+                            </div>
+                            <div class="col-lg-3 disciplina">
+                                <p>Evento</p>
+                            </div>
+                        </div>
+
+                        <div class="row body">
+                            <div class="col-lg-12" style="text-align: left">
+                                <p>{{article.desc}}</p>
+                            </div>
+                        </div>
+                        <div class="row footer">
+                            <p> <i class="fa fa-calendar"></i>Entrega até {{article.eventDate | date}}</p>
+                        </div>
+                    </md-card>
+                </div>
+
+                <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 4">
+                    <md-card class="card_event card_vermelho">
+
+                        <div class="row header">
+                            <div class="col-lg-3" style="text-align: left; margin-top:7px;">
+                                <img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
+                            </div>
+                            <div class="col-lg-6" style="text-align:left; margin-top:10px;">
+                                <p>{{article.disciplina}}</p>
+                                <p class="cinzento">{{article.createdBy}}</p>
+                            </div>
+                            <div class="col-lg-3 col-xs-3 disciplina">
+                                <p>Aviso</p>
+                            </div>
+                        </div>
+
+                        <div class="row body">
+                            <div class="col-lg-12" style="text-align: left">
+                                <p>{{article.desc}}</p>
+                            </div>
+                        </div>
+                        <div class="row footer">
+                            <p> <i class="fa fa-calendar"></i>Data {{article.eventDate | date}}</p>
+                        </div>
+                    </md-card>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 1 && filtro == 1">
                 <md-card class="card_event card_verde">
 
                     <div class="row header">
@@ -99,7 +216,7 @@
                     </div>
                 </md-card>
             </div>
-            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 2 && filtro == 2 || filtro == 0">
+            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 2 && filtro == 2">
                 <md-card class="card_event card_roxo">
 
                     <div class="row header">
@@ -126,7 +243,7 @@
                     </div>
                 </md-card>
             </div>
-            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 3 && filtro == 3 || filtro == 0">
+            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 3 && filtro == 3">
                 <md-card class="card_event card_amarelo">
 
                     <div class="row header">
@@ -153,7 +270,7 @@
                 </md-card>
             </div>
 
-            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 4 && filtro == 4 || filtro == 0">
+            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 4 && filtro == 4">
                 <md-card class="card_event card_vermelho">
 
                     <div class="row header">
