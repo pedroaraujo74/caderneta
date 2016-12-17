@@ -1,0 +1,15 @@
+tr:first-child td{
+background: #ccc;
+}
+
+
+tr:first-child{
+    background: red;
+}
+
+td{
+    padding: 10px !important;
+    width: 50px !important;
+    text-align: center;
+    background: #ccc;
+}

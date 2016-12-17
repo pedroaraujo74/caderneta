@@ -79,7 +79,6 @@ export class FeedComponent implements OnInit {
                     }
 
                     this.http.post('https://caderneta-2b6e4.firebaseio.com/turmas/' + this.id + '/feed.json', this.body)
-                        .map(res => res.json())
                         .subscribe(
                         data => { console.log("sucesso") },
                         err =>

@@ -23,6 +23,7 @@ import { ProfessoresComponent } from './home/turma/professores/professores.compo
 
 import { DatepickerModule } from 'angular2-material-datepicker';
 import { Ng2SelectModule } from 'ng2-material-select';
+import { HorarioComponent } from './home/turma/horario/horario.component';
 
 
 
@@ -65,6 +66,9 @@ const appRoutes: Routes = [
                     },
                     {
                         path: 'professores', component: ProfessoresComponent
+                    },
+                    {
+                        path: 'horario', component: HorarioComponent
                     }
                 ],
             }
@@ -86,7 +90,8 @@ const appRoutes: Routes = [
         ChatComponent,
         FeedComponent,
         ProfessoresComponent,
-        EncarregadosComponent
+        EncarregadosComponent,
+        HorarioComponent
     ],
     imports: [
         BrowserModule,

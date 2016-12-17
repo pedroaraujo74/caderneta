@@ -51,7 +51,7 @@ export class TurmasComponent implements OnInit {
                         query: {
                             orderByKey: true,
                             equalTo: this.turmas[i],
-                            
+
                         }
                     })
 
@@ -88,65 +88,89 @@ export class TurmasComponent implements OnInit {
     add() {
 
         let body = {
-            nome: this.class_name
-        }
-
-
-
-        this.http.post("https://caderneta-2b6e4.firebaseio.com/turmas.json", body).subscribe(
-            data => {
-                this.class_name = ""; console.log(data);
-
-                this.mensagem = "Turma Inserida com sucesso, partilhe o seguinte código com os professores e encarregados de educação desta turma: " + data.json().name;
-
-                console.log(data.json().name);
-                this.ngOnInit();
-                let temp = this.turmas;
-                temp.push(data.json().name);
-                this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + this.user.uid + '/codigo_turmas.json', temp)
-                    .subscribe(
-                    data => {
-
-
-
-                    },
-                    err =>
-                        () => console.log('complete')
-
-                    )
+            "horario": {
+                "quarta": [{
+                    "inicio": 1600,
+                    "nome": " ",
+                }],
+                "quinta": [{
+                    "inicio": 1600,
+                    "nome": " "
+                }],
+                "segunda": [{
+                    "inicio": 1500,
+                    "nome": ""
+                }],
+                "sexta": [{
+                    "inicio": 1500,
+                    "nome": " "
+                }],
+                "terca": [{
+                    "inicio": 1500,
+                    "nome": " "
+                }],
+               
             },
-            err => console.log('sucesso')
-        )
+            "nome": this.class_name
+        }
+    
+
+
+
+this.http.post("https://caderneta-2b6e4.firebaseio.com/turmas.json", body).subscribe(
+    data => {
+        this.class_name = ""; console.log(data);
+
+        this.mensagem = "Turma Inserida com sucesso, partilhe o seguinte código com os professores e encarregados de educação desta turma: " + data.json().name;
+
+        console.log(data.json().name);
+        this.ngOnInit();
+        let temp = this.turmas;
+        temp.push(data.json().name);
+        this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + this.user.uid + '/codigo_turmas.json', temp)
+            .subscribe(
+            data => {
+
+
+
+            },
+            err =>
+                () => console.log('complete')
+
+            )
+    },
+    err => console.log('sucesso')
+)
     }
 
-    associar() {
+associar() {
 
-        this.list = this.af.database.list("/turmas", {
-            query: {
-                orderByKey: true,
-                equalTo: this.class_name1
-            }
-        });
+    this.list = this.af.database.list("/turmas", {
+        query: {
+            orderByKey: true,
+            equalTo: this.class_name1
+        }
+    });
 
-        let obs = this.list.subscribe(res => {
+    let obs = this.list.subscribe(res => {
 
-            if (res[0] == undefined) {
-                this.erro = "Não existe nenhuma turma com este código";
-                console.log(this.erro);
-            } else {
+        if (res[0] == undefined) {
+            this.erro = "Não existe nenhuma turma com este código";
+            console.log(this.erro);
+        } else {
 
-                let temp = this.turmas;
-                temp.push(this.class_name1);
+            let temp = this.turmas;
+            temp.push(this.class_name1);
 
-                this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + this.user.uid + '/codigo_turmas.json', temp)
-                    .subscribe(
-                    data => { this.class_name1 = ""; this.ngOnInit(); },
-                    err =>
-                        () => console.log('complete')
+            this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + this.user.uid + '/codigo_turmas.json', temp)
+                .subscribe(
+                data => { this.class_name1 = ""; this.ngOnInit(); },
+                err =>
+                    () => console.log('complete')
 
-                    )
-            }
-        });
-    }
+                )
+        }
+    });
+}
 }
 
