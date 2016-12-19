@@ -16,6 +16,8 @@ export class RegistoComponent implements OnInit {
     body_bd: any;
     erro: any;
     email: any;
+    pw_confirm: any;
+    isVisible: any;
     password: any;
     form: FormGroup;
     err: any;
@@ -30,53 +32,78 @@ export class RegistoComponent implements OnInit {
             disciplina: "",
         });
 
-
-
     }
 
     registar(model: User, isValid: boolean) {
 
 
 
-        this.body_auth= {
+        this.body_auth = {
             email: model.email,
-             password: model.password,
+            password: model.password,
 
         }
 
         this.body_bd = {
-             email: model.email,
-             name : model.name,
-             disciplina : model.disciplina,
+            email: model.email,
+            name: model.name,
+            disciplina: model.disciplina,
         }
 
-        
+        if (model.password != this.pw_confirm) {
+            this.err = "Passwords não coincidem";
+            this.isVisible = true;
+            setTimeout(() => {
+                this.isVisible = false;
+            }, 5000);
+        } else {
 
-        this.af.auth.createUser(this.body_auth).then(res => {
-            console.log(res);
+            this.af.auth.createUser(this.body_auth).then(res => {
+                console.log(res);
 
 
-            this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + this.af.auth.getAuth().uid + '/.json', this.body_bd)
-                .map(res => res.json())
-                .subscribe(
-                data => {
-                    let teste = this.af.auth.subscribe(res => {
-                        console.log(res); 
+                this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + this.af.auth.getAuth().uid + '/.json', this.body_bd)
+                    .map(res => res.json())
+                    .subscribe(
+                    data => {
+                        let teste = this.af.auth.subscribe(res => {
+                            console.log(res);
 
-                        res.auth.updateProfile({
-                            displayName: "professor",
-                            photoURL: ""
+                            res.auth.updateProfile({
+                                displayName: "professor",
+                                photoURL: ""
+                            })
                         })
-                    })
-                },
+                    },
 
-                err => console.log(err)
-                );
-            this.router.navigate(['/login'])
+                    err => console.log(err)
+                    );
+                this.router.navigate(['/login'])
+            }
+
+            ).catch(err => {
+
+                this.isVisible = true;
+                setTimeout(() => {
+                    this.isVisible = false;
+                }, 5000);
+
+                this.err = err.message;
+                if (err.message == "The email address is badly formatted.") {
+                    this.err = "Email mal formatado";
+                    this.isVisible = true;
+                }
+                if (err.message == "There is no user record corresponding to this identifier. The user may have been deleted.") {
+                    this.err = "Não existe utilizador com este email";
+                    this.isVisible = true;
+                }
+                if (err.message == "The password is invalid or the user does not have a password.") {
+                    this.err = "Email e password não correspondem";
+                    this.isVisible = true;
+
+                }
+            });
         }
-
-        ).catch(err => this.err = err)
-
 
 
 

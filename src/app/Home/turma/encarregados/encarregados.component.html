@@ -1,22 +1,25 @@
 <div class="container">
 
-    <md-progress-circle mode="indeterminate" *ngIf="isVisible == true"></md-progress-circle>
+    <md-progress-circle mode="indeterminate" *ngIf="isVisible == true" style="margin: 0 auto; margin-top: 150px"></md-progress-circle>
 
-    <div class="row encarregados " *ngIf="isVisible == false">
+<div class="row encarregados " *ngIf="isVisible == false">
 
-        <h2 *ngIf="encarregados == null"> Teste </h2>
-        <div class="encarregado col-lg-3" *ngFor="let encarregado of _encarregados">
-            <md-card>
-                <div class="text-center">
-                    <img [src]="encarregado.photoUrl" class="img-circle img-responsive img-avatar ">
-                </div>
-                <i *ngIf="encarregado.notificacao == undefined" class="fa fa-bell" style="color: #ccc"></i>
-                <i *ngIf="encarregado.notificacao == true" class="fa fa-bell" style="color: red"></i>
-                <i *ngIf="encarregado.notificacao == false" class="fa fa-bell" style="color: #ccc"></i>
-                <h4> {{encarregado.name}}</h4>
-                <p> <strong>Pai de: </strong> {{encarregado.filho}}</p>
-                <button md-raised-button color="primary" style="width: 100%" (click)="avancar(encarregado?.$key)">Ver</button>
-            </md-card>
+    <div *ngIf="check == false" style="text-align: center; line-height: 40px;">
+<h3>Não existem Encarregados associados a esta turma. <br> Partilhe o código <b>{{id}}</b> com os encarregados de educação desta turma</h3>
+</div>
+
+<div class="encarregado col-lg-3" *ngFor="let encarregado of _encarregados">
+    <md-card>
+        <div class="text-center">
+            <img [src]="encarregado.photoUrl" class="img-circle img-responsive img-avatar ">
         </div>
-    </div>
+        <i *ngIf="encarregado.notificacao == undefined" class="fa fa-bell" style="color: #ccc"></i>
+<i *ngIf="encarregado.notificacao == true" class="fa fa-bell" style="color: red"></i>
+<i *ngIf="encarregado.notificacao == false" class="fa fa-bell" style="color: #ccc"></i>
+<h4> {{encarregado.name}}</h4>
+<p> <strong>Encarregado de: </strong> {{encarregado.filho}}</p>
+<button md-raised-button color="primary" style="width: 100%" (click)="avancar(encarregado?.$key)">Ver</button>
+</md-card>
+</div>
+</div>
 </div>

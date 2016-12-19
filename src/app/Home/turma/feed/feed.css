@@ -2,6 +2,14 @@
     padding-bottom: 0;
 }
 
+.col-lg-3{
+        display: inline-block;
+}
+
+.col-lg-6{
+    display: inline-block;
+}
+
 .container{
         position: relative;
     top: 100px !important;
@@ -29,12 +37,33 @@
     position: fixed;
     bottom: 30px;
     right: 30px;
-
+}
+.header :first-child{
+        padding: 0;
+    text-align: left;
+    padding-left: 18px;
 }
 
+.header :nth-child(2){
+    padding: 0;
+    text-align: left;
+}
+.header :nth-child(2) p{
+    padding: 0;
+    text-align: left;
+}
+
+.disciplina{
+    text-align: center;
+}
+.disciplina p{
+    padding: 0 !important;
+      text-align: center !important;
+}
 .img-small{
-    width: 50px;
-    height: 50px;
+    padding: 0 !important;
+        width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 .feed_inputs{
@@ -71,13 +100,24 @@ ng2-select{
         margin-top: 50px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {  
     .articles{
        margin-left: 0% !important;
 }
     .feed{ 
        margin-left: 0% !important;
 }
+
+  .card_event .header{
+        padding: 0;
+    }
+    .card_event img{
+        margin-bottom: 15px !important;
+    }
+    .card_event .disciplina{
+        margin-top: 0 !important;
+    }
+
 }   
 .card_event{
     padding: 15px;
@@ -105,9 +145,6 @@ ng2-select{
 
 .card_event .header p{
    
-}
-.card_event i{
-    margin-right: 5px;
 }
 
 .card_roxo .header{
@@ -209,7 +246,12 @@ md-card{
     height: 25px;
         position: absolute;
     bottom: 0;
+    width: 100%;
     padding: 0px 0px 5px 18px;
+    text-align: left;
+}
+.card_event .footer i{
+    margin-right: 10px !important;
 }
 
 

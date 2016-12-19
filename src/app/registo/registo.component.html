@@ -1,41 +1,38 @@
-<!--
-<h1> Registo </h1>
 
-<md-card class="demo-card demo-basic">
-  <md-toolbar color="primary">Basic</md-toolbar>
-  <md-card-content>
-    <form [formGroup]="form" novalidate (ngSubmit)="registar(form.value, form.valid)">
+<div class="background"></div>
 
-      <md-input placeholder="Nome" style="width: 50%" formControlName="name"></md-input>
-
-      <md-input placeholder="Email" style="width: 50%" formControlName="email"></md-input>
-
-      <md-input placeholder="password" style="width: 50%" type="password" formControlName="password"></md-input>
-
-      <button md-raised-button color="primary" type="submit">Registar</button>
-      <p>{{this.err}}</p>
-    </form>
-
-  </md-card-content>
-</md-card>
-
--->
-
-
-<form [formGroup]="form" novalidate (ngSubmit)="registar(form.value, form.valid)">
-
-  <h3>Registo</h3>
-
-  <md-input placeholder="Nome" formControlName="name"></md-input>
-
-  <md-input placeholder="Email" formControlName="email"></md-input>
-
-  <md-input placeholder="password" type="password" formControlName="password"></md-input>
-
-  <md-input placeholder="Disciplina Lecionada" type="text" formControlName="disciplina"></md-input>
-
-  <button md-raised-button color="primary" type="submit">Registar</button>
+<div class="contentIn">
+        <div class="row">
+            <div class="col-xs-12" style="font-size: 24px;font-weight: 600;color: #15A9FC;margin-bottom: 15px;text-align: left;">
+                REGISTO
+            </div>
+        </div>
+        <div class="row">
+            <form [formGroup]="form" novalidate (ngSubmit)="registar(form.value, form.valid)">
+                <div class="col-xs-12">
+                   <md-input class="inputForm" placeholder="Nome" formControlName="name"></md-input>
+                </div>
+                <div class="col-xs-12">
+                    <md-input class="inputForm" placeholder="Email" formControlName="email"></md-input>
+                </div>
+                <div class="col-xs-12">
+                    <md-input class="inputForm" placeholder="Password" type="password" formControlName="password"></md-input>
+                </div>
+                <div class="col-xs-12">
+                     <md-input class="inputForm" placeholder="Confirmar password" type="password" [(ngModel)]="pw_confirm" [ngModelOptions]="{standalone: true}"></md-input>
+                </div>
+                <div class="col-xs-12">
+                    <md-input  class="inputForm" placeholder="Disciplina Lecionada" type="text" formControlName="disciplina"></md-input>
+                </div>
+                <div class="col-xs-12 text-right" style="margin-top: 5px;">
+                    <button md-raised-button type="submit" class="btnCenas" style="background-color: #15A9FC; color: #FFF">REGISTAR</button>
+                </div>
+            </form>
+        </div>
+</div>
 
 
-  <p>{{this.err}}</p>
-</form>
+<div class="alertErros" style="color: #FFF" *ngIf="isVisible == true">
+    <strong><i class="fa fa-info-circle" style="margin-right: 12px; margin-top: -1px"></i></strong>{{this.err}}
+</div>
+ 

@@ -1,31 +1,31 @@
 <!-- / College Timetable -->
-<div class="container" style="top: 150px">
+<div class="container" style="text-align: center;top: 150px">
 
-<div class="row">
+<div class="row" style="margin: 0 auto;">
   <form [formGroup]="form" novalidate (ngSubmit)="inserir(form.value, form.valid)">
-  <input type="text" formControlName="nome" >
-  <span>Dia </span>
-  <select formControlName="dia">
+  <span> Disciplina </span><input type="text" formControlName="nome" style="margin-left: 10px">
+  <span style="margin-left: 10px">Dia </span>
+  <select formControlName="dia" style="margin-left: 10px">
   <option value="segunda">Segunda</option>
   <option value="terca">Terça</option>
   <option value="quarta">Quarta</option>
   <option value="quinta">Quinta</option>
   <option value="sexta">Sexta</option>
 </select>
-  <span>Hora</span>
-  <select formControlName="hora">
-  <option value="0900">09:00</option>
-  <option value="1000">10:00</option>
-  <option value="1100">11:00</option>
-  <option value="1200">12:00</option>
-  <option value="1300">13:00</option>
-  <option value="1400">14:00</option>
-  <option value="1500">15:00</option>
-  <option value="1600">16:00</option>
-  <option value="1700">17:00</option>
-  <option value="1800">18:00</option>
+  <span style="margin-left: 10px" >Hora</span>
+  <select formControlName="hora" style="margin-left: 10px">
+  <option value="09:00">09:00</option>
+  <option value="10:00">10:00</option>
+  <option value="11:00">11:00</option>
+  <option value="12:00">12:00</option>
+  <option value="13:00">13:00</option>
+  <option value="14:00">14:00</option>
+  <option value="15:00">15:00</option>
+  <option value="16:00">16:00</option>
+  <option value="17:00">17:00</option>
+  <option value="18:00">18:00</option>
 </select>
-<button type="submit" class="btn btn-primary" >Inserir</button>
+ <button md-raised-button color="primary" style="margin-left: 10px" type="submit">Inserir</button>
   </form>
 </div>
 

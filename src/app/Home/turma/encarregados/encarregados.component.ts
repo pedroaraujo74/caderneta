@@ -22,7 +22,7 @@ export class EncarregadosComponent implements OnInit {
     result: any;
     encarregados: any;
     notificacoes: any;
-
+    check: any;
     isVisible: any = true;
     constructor(private af: AngularFire, private route: ActivatedRoute, private router: Router, private http: Http) { }
 
@@ -49,6 +49,8 @@ export class EncarregadosComponent implements OnInit {
 
 
             let obs = this.encarregados.subscribe(res => {
+
+                this.check = res;
 
                 for (let i = 0; i < res.length; i++) {
 

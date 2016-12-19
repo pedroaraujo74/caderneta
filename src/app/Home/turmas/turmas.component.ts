@@ -20,7 +20,7 @@ export class TurmasComponent implements OnInit {
     turmas: any;
     class_name1: any;
     list: any;
-    class_name: any;
+    class_name: any = "";
     mensagem: any;
     disciplinas: FirebaseListObservable<any[]>;
     constructor(public af: AngularFire, private http: Http, private router: Router) { }
@@ -109,68 +109,71 @@ export class TurmasComponent implements OnInit {
                     "inicio": 1500,
                     "nome": " "
                 }],
-               
+
             },
             "nome": this.class_name
         }
-    
 
 
 
-this.http.post("https://caderneta-2b6e4.firebaseio.com/turmas.json", body).subscribe(
-    data => {
-        this.class_name = ""; console.log(data);
-
-        this.mensagem = "Turma Inserida com sucesso, partilhe o seguinte código com os professores e encarregados de educação desta turma: " + data.json().name;
-
-        console.log(data.json().name);
-        this.ngOnInit();
-        let temp = this.turmas;
-        temp.push(data.json().name);
-        this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + this.user.uid + '/codigo_turmas.json', temp)
-            .subscribe(
-            data => {
-
-
-
-            },
-            err =>
-                () => console.log('complete')
-
-            )
-    },
-    err => console.log('sucesso')
-)
-    }
-
-associar() {
-
-    this.list = this.af.database.list("/turmas", {
-        query: {
-            orderByKey: true,
-            equalTo: this.class_name1
-        }
-    });
-
-    let obs = this.list.subscribe(res => {
-
-        if (res[0] == undefined) {
-            this.erro = "Não existe nenhuma turma com este código";
-            console.log(this.erro);
+        if (this.class_name == "" || this.class_name == " " ||  this.class_name == "  " ) {
+            this.erro = "Tem que inserir um nome para a turma";
         } else {
 
-            let temp = this.turmas;
-            temp.push(this.class_name1);
+            this.http.post("https://caderneta-2b6e4.firebaseio.com/turmas.json", body).subscribe(
+                data => {
+                    this.class_name = ""; console.log(data);
 
-            this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + this.user.uid + '/codigo_turmas.json', temp)
-                .subscribe(
-                data => { this.class_name1 = ""; this.ngOnInit(); },
-                err =>
-                    () => console.log('complete')
+                    this.mensagem = "Turma Inserida com sucesso, partilhe o seguinte código com os professores e encarregados de educação desta turma: " + data.json().name;
 
-                )
+                    console.log(data.json().name);
+
+                    let temp = this.turmas;
+                    temp.push(data.json().name);
+                    this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + this.user.uid + '/codigo_turmas.json', temp)
+                        .subscribe(
+                        data => {
+                            this.ngOnInit();
+
+                        },
+                        err =>
+                            () => console.log('complete')
+
+                        )
+                },
+                err => console.log('sucesso')
+            )
         }
-    });
-}
+    }
+
+    associar() {
+
+        this.list = this.af.database.list("/turmas", {
+            query: {
+                orderByKey: true,
+                equalTo: this.class_name1
+            }
+        });
+
+        let obs = this.list.subscribe(res => {
+
+            if (res[0] == undefined) {
+                this.erro = "Não existe nenhuma turma com este código";
+                console.log(this.erro);
+            } else {
+
+                let temp = this.turmas;
+                temp.push(this.class_name1);
+
+                this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + this.user.uid + '/codigo_turmas.json', temp)
+                    .subscribe(
+                    data => { this.class_name1 = ""; this.ngOnInit(); },
+                    err =>
+                        () => console.log('complete')
+
+                    )
+            }
+        });
+    }
 }
 

@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
     err: any;
     email: any;
     password: any;
+    isVisible: any = false;
     form: FormGroup;
     constructor(public af: AngularFire, private router: Router, private http: Http, private _fb: FormBuilder) {
 
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
             password: ""
         });
 
+     
     }
 
 
@@ -49,7 +51,24 @@ export class LoginComponent implements OnInit {
 
 
         }).catch(err => {
+            this.isVisible = true;
+               setTimeout(() => {
+            this.isVisible = false;
+        }, 5000);
+
             this.err = err.message;
+            if (err.message == "The email address is badly formatted.") {
+                this.err = "Email mal formatado";
+                this.isVisible = true;
+            }
+            if (err.message == "There is no user record corresponding to this identifier. The user may have been deleted.") {
+                this.err = "Não existe utilizador com este email";
+                this.isVisible = true;
+            }
+            if (err.message == "The password is invalid or the user does not have a password.") {
+                this.err = "Email e password não correspondem";
+                this.isVisible = true;
+            }
         })
     }
 

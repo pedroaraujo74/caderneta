@@ -5,23 +5,17 @@
 
             <form [formGroup]="form" novalidate (ngSubmit)="addEvent(form.value, form.valid)">
                 <md-card class="eventCard row">
-
                     <div class="row">
-                        <div class="col-lg-12">
-                            <md-input placeholder="Titulo" formControlName="title"></md-input>
-                        </div>
+
                         <div class="col-lg-12">
                             <md-input placeholder="Descrição" formControlName="desc" class="descricao"></md-input>
                         </div>
-
                     </div>
-
                     <div class="row">
                         <div class="col-lg-12 feed_inputs">
 
                             <span> Data: </span>
-                            <material-datepicker [(date)]="date" [(ngModel)]="date" [placeholder]="'Data'" formControlName="eventDate" ngDefaultControl></material-datepicker>
-
+                            <input type="date" [(ngModel)]="date" formControlName="eventDate">
 
                         </div>
                     </div>
@@ -29,7 +23,7 @@
                     <div class="row">
                         <div class="col-lg-8 tipos_inputs">
                             <md-radio-group formControlName="type">
-                                <md-radio-button value="1">Sumário</md-radio-button>
+                                <md-radio-button value="1" checked="true">Sumário</md-radio-button>
                                 <md-radio-button value="2">TPC</md-radio-button>
                                 <md-radio-button value="3">Eventos</md-radio-button>
                                 <md-radio-button value="4">Avisos</md-radio-button>
@@ -49,258 +43,262 @@
         </div>
     </div>
 
-    <div *ngIf="feed == undefined">
-        <md-progress-circle mode="indeterminate" color="primary"></md-progress-circle>
-    </div>
+
 
     <div style="margin-top:50px">
-        <div class="row">
-            <div class="col-lg-12" style="text-align:center; padding: 4%;">
+<div class="row" *ngIf="check != false" style="margin-bottom: 15px;">
 
-                <h4 style="margin-left: 12px;">Filtrar por: </h4>
-                <md-radio-group [(ngModel)]="filtro" style="margin-bottom:25px;">
-                    <md-radio-button value="0">Todos</md-radio-button>
-                    <md-radio-button value="1">Sumário</md-radio-button>
-                    <md-radio-button value="2">TPC</md-radio-button>
-                    <md-radio-button value="3">Eventos</md-radio-button>
-                    <md-radio-button value="4">Avisos</md-radio-button>
+<div class="col-lg-12" style="text-align:center;">
 
-                </md-radio-group>
+<h4 style="margin-left: 12px;"> Mostrar: </h4>
+<md-radio-group [(ngModel)]="filtro" style="margin-bottom:50px;">
+<md-radio-button value="0">Todos</md-radio-button>
+<md-radio-button value="1">Sumário</md-radio-button>
+<md-radio-button value="2">TPC</md-radio-button>
+<md-radio-button value="3">Eventos</md-radio-button>
+<md-radio-button value="4">Avisos</md-radio-button>
+</md-radio-group>
 
-            </div>
-        </div>
+</div>
+</div>
 
-        <div *ngFor="let article of feed | async;">
+<div *ngIf="check == false" style="text-align: center">
+<h2>Não existem novidades no seu feed</h2>
+</div>
+
+<div *ngFor="let article of feed | async;">
+
+    <div *ngIf="filtro == 0">
+        <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 1">
+            <md-card class="card_event card_verde">
+
+                <i style="float: right; color: red; position: absolute; top: 10px; right: 10px;" class="fa fa-times fa-lg" (click)="removeEvento(article.$key)"></i>
+
+<div class="row header">
+    <div class="col-lg-3" style="text-align: left; margin-top:7px;">
+<img [src]="article.photoUrl" class="img-small" style="display:inline; object-fit:cover; margin-right: 10px;">
+</div>
+<div class="col-lg-5" style="text-align:left; margin-top:10px;">
+<p>{{article.disciplina}}</p>
+<p class="cinzento">{{article.createdBy}}</p>
+</div>
+<div class="col-lg-3 disciplina">
+    <p>Sumário</p>
+</div>
+</div>
+
+<div class="row body">
+    <div class="col-lg-12" style="text-align: left">
+<p>{{article.desc}}</p>
+</div>
+</div>
+<div class="row footer">
+    <p> <i class="fa fa-calendar"></i>Data: {{article.eventDate | date}}
+    </p>
+</div>
+</md-card>
+</div>
+<div class="col-lg-4 card col-xs-12" *ngIf="article.type == 2">
+    <md-card class="card_event card_roxo">
+        <i style="float: right; color: red; position: absolute; top: 10px; right: 10px;" class="fa fa-times fa-lg" (click)="removeEvento(article.$key)"></i>
+        <div class="row header">
+            <div class="col-lg-3" style="text-align: left; margin-top:7px;">
+<img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
+</div>
+<div class="col-lg-5" style="text-align:left; margin-top:10px;">
+<p>{{article.disciplina}}</p>
+<p class="cinzento">{{article.createdBy}}</p>
+</div>
+<div class="col-lg-3 disciplina">
+    <p>TPC</p>
+</div>
+
+</div>
+
+<div class="row body">
+    <div class="col-lg-12" style="text-align: left">
+
+<p>{{article.desc}}</p>
+</div>
+</div>
+<div class="row footer">
+    <p> <i class="fa fa-calendar"></i>Entrega até {{article.eventDate | date}}</p>
+</div>
+</md-card>
+</div>
+<div class="col-lg-4 card col-xs-12" *ngIf="article.type == 3">
+    <md-card class="card_event card_amarelo">
+<i style="float: right; color: red; position: absolute; top: 10px; right: 10px;" class="fa fa-times fa-lg" (click)="removeEvento(article.$key)"></i>    
+        <div class="row header">
+            <div class="col-lg-3" style="text-align: left; margin-top:7px;">
+<img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
+</div>
+<div class="col-lg-5" style="text-align:left; margin-top:10px;">
+<p>{{article.disciplina}}</p>
+<p class="cinzento">{{article.createdBy}}</p>
+</div>
+<div class="col-lg-3 disciplina">
+    <p>Evento</p>
+</div>
+</div>
+
+<div class="row body">
+    <div class="col-lg-12" style="text-align: left">
+<p>{{article.desc}}</p>
+</div>
+</div>
+<div class="row footer">
+    <p> <i class="fa fa-calendar"></i>Data: {{article.eventDate | date}}</p>
+</div>
+</md-card>
+</div>
+
+<div class="col-lg-4 card col-xs-12" *ngIf="article.type == 4">
+    <md-card class="card_event card_vermelho">
+<i style="float: right; color: red; position: absolute; top: 10px; right: 10px;" class="fa fa-times fa-lg" (click)="removeEvento(article.$key)"></i>
+        <div class="row header">
+            <div class="col-lg-3" style="text-align: left; margin-top:7px;">
+<img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
+</div>
+<div class="col-lg-5" style="text-align:left; margin-top:10px;">
+<p>{{article.disciplina}}</p>
+<p class="cinzento">{{article.createdBy}}</p>
+</div>
+<div class="col-lg-3 col-xs-3 disciplina">
+    <p>Aviso</p>
+</div>
+</div>
+
+<div class="row body">
+    <div class="col-lg-12" style="text-align: left">
+<p>{{article.desc}}</p>
+</div>
+</div>
+<div class="row footer">
+    <p> Data: {{article.eventDate | date}}</p>
+</div>
+</md-card>
+</div>
+</div>
 
 
-            <div *ngIf="filtro == 0">
-                <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 1">
-                    <md-card class="card_event card_verde">
-
-                        <div class="row header">
-                            <div class="col-lg-3" style="text-align: left; margin-top:7px;">
-                                <img [src]="article.photoUrl" class="img-small" style="display:inline; object-fit:cover; margin-right: 10px;">
-                            </div>
-                            <div class="col-lg-6" style="text-align:left; margin-top:10px;">
-                                <p>{{article.disciplina}}</p>
-                                <p class="cinzento">{{article.createdBy}}</p>
-                            </div>
-                            <div class="col-lg-3 disciplina">
-                                <p>Sumário</p>
-                            </div>
-
-                        </div>
-
-                        <div class="row body">
-                            <div class="col-lg-12" style="text-align: left">
-                                <p>{{article.desc}}</p>
-                            </div>
-                        </div>
-                        <div class="row footer">
-                            <p> <i class="fa fa-calendar"></i>Data: {{article.eventDate | date}}<i style="float:right" class="fa fa-trash"></i></p>
-                        </div>
-                    </md-card>
-                </div>
-                <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 2">
-                    <md-card class="card_event card_roxo">
-
-                        <div class="row header">
-                            <div class="col-lg-3" style="text-align: left; margin-top:7px;">
-                                <img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
-                            </div>
-                            <div class="col-lg-6" style="text-align:left; margin-top:10px;">
-                                <p>{{article.disciplina}}</p>
-                                <p class="cinzento">{{article.createdBy}}</p>
-                            </div>
-                            <div class="col-lg-3 disciplina">
-                                <p>TPC</p>
-                            </div>
-
-                        </div>
-
-                        <div class="row body">
-                            <div class="col-lg-12" style="text-align: left">
-                                <p>{{article.desc}}</p>
-                            </div>
-                        </div>
-                        <div class="row footer">
-                            <p> <i class="fa fa-calendar"></i>Entrega até {{article.eventDate | date}}</p>
-                        </div>
-                    </md-card>
-                </div>
-                <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 3">
-                    <md-card class="card_event card_amarelo">
-
-                        <div class="row header">
-                            <div class="col-lg-3" style="text-align: left; margin-top:7px;">
-                                <img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
-                            </div>
-                            <div class="col-lg-6" style="text-align:left; margin-top:10px;">
-                                <p>{{article.disciplina}}</p>
-                                <p class="cinzento">{{article.createdBy}}</p>
-                            </div>
-                            <div class="col-lg-3 disciplina">
-                                <p>Evento</p>
-                            </div>
-                        </div>
-
-                        <div class="row body">
-                            <div class="col-lg-12" style="text-align: left">
-                                <p>{{article.desc}}</p>
-                            </div>
-                        </div>
-                        <div class="row footer">
-                            <p> <i class="fa fa-calendar"></i>Entrega até {{article.eventDate | date}}</p>
-                        </div>
-                    </md-card>
-                </div>
-
-                <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 4">
-                    <md-card class="card_event card_vermelho">
-
-                        <div class="row header">
-                            <div class="col-lg-3" style="text-align: left; margin-top:7px;">
-                                <img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
-                            </div>
-                            <div class="col-lg-6" style="text-align:left; margin-top:10px;">
-                                <p>{{article.disciplina}}</p>
-                                <p class="cinzento">{{article.createdBy}}</p>
-                            </div>
-                            <div class="col-lg-3 col-xs-3 disciplina">
-                                <p>Aviso</p>
-                            </div>
-                        </div>
-
-                        <div class="row body">
-                            <div class="col-lg-12" style="text-align: left">
-                                <p>{{article.desc}}</p>
-                            </div>
-                        </div>
-                        <div class="row footer">
-                            <p> <i class="fa fa-calendar"></i>Data {{article.eventDate | date}}</p>
-                        </div>
-                    </md-card>
-                </div>
-            </div>
 
 
 
 
 
+<div class="col-lg-4 card col-xs-12" *ngIf="article.type == 1 && filtro == 1">
+    <md-card class="card_event card_verde">
+<i style="float: right; color: red; position: absolute; top: 10px; right: 10px;" class="fa fa-times fa-lg" (click)="removeEvento(article.$key)"></i>
+        <div class="row header">
+            <div class="col-lg-3" style="text-align: left; margin-top:7px;">
+<img [src]="article.photoUrl" class="img-small" style="display:inline; object-fit:cover; margin-right: 10px;">
+</div>
+<div class="col-lg-5" style="text-align:left; margin-top:10px;">
+<p>{{article.disciplina}}</p>
+<p class="cinzento">{{article.createdBy}}</p>
+</div>
+<div class="col-lg-3 disciplina">
+    <p>Sumário</p>
+</div>
 
+</div>
 
-            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 1 && filtro == 1">
-                <md-card class="card_event card_verde">
+<div class="row body">
+    <div class="col-lg-12" style="text-align: left">
+<p>{{article.desc}}</p>
+</div>
+</div>
+<div class="row footer">
+    <p> <i class="fa fa-calendar"></i>Data: {{article.eventDate | date}}
+</div>
+</md-card>
+</div>
+<div class="col-lg-4 card col-xs-12" *ngIf="article.type == 2 && filtro == 2">
+    <md-card class="card_event card_roxo">
+<i style="float: right; color: red; position: absolute; top: 10px; right: 10px;" class="fa fa-times fa-lg" (click)="removeEvento(article.$key)"></i>
+        <div class="row header">
+            <div class="col-lg-3" style="text-align: left; margin-top:7px;">
+<img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
+</div>
+<div class="col-lg-5" style="text-align:left; margin-top:10px;">
+<p>{{article.disciplina}}</p>
+<p class="cinzento">{{article.createdBy}}</p>
+</div>
+<div class="col-lg-3 disciplina">
+    <p>TPC</p>
+</div>
 
-                    <div class="row header">
-                        <div class="col-lg-3" style="text-align: left; margin-top:7px;">
-                            <img [src]="article.photoUrl" class="img-small" style="display:inline; object-fit:cover; margin-right: 10px;">
-                        </div>
-                        <div class="col-lg-6" style="text-align:left; margin-top:10px;">
-                            <p>{{article.disciplina}}</p>
-                            <p class="cinzento">{{article.createdBy}}</p>
-                        </div>
-                        <div class="col-lg-3 disciplina">
-                            <p>Sumário</p>
-                        </div>
+</div>
 
-                    </div>
+<div class="row body">
+    <div class="col-lg-12" style="text-align: left">
+<p>{{article.desc}}</p>
+</div>
+</div>
+<div class="row footer">
+    <p> <i class="fa fa-calendar"></i>Entrega até {{article.eventDate | date}}</p>
+</div>
+</md-card>
+</div>
+<div class="col-lg-4 card col-xs-12" *ngIf="article.type == 3 && filtro == 3">
+    <md-card class="card_event card_amarelo">
+<i style="float: right; color: red; position: absolute; top: 10px; right: 10px;" class="fa fa-times fa-lg" (click)="removeEvento(article.$key)"></i>
+        <div class="row header">
+            <div class="col-lg-3" style="text-align: left; margin-top:7px;">
+<img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
+</div>
+<div class="col-lg-5" style="text-align:left; margin-top:10px;">
+<p>{{article.disciplina}}</p>
+<p class="cinzento">{{article.createdBy}}</p>
+</div>
+<div class="col-lg-3 disciplina">
+    <p>Evento</p>
+</div>
+</div>
 
-                    <div class="row body">
-                        <div class="col-lg-12" style="text-align: left">
-                            <p>{{article.desc}}</p>
-                        </div>
-                    </div>
-                    <div class="row footer">
-                        <p> <i class="fa fa-calendar"></i>Data: {{article.eventDate | date}}<i style="float:right" class="fa fa-trash"></i></p>
-                    </div>
-                </md-card>
-            </div>
-            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 2 && filtro == 2">
-                <md-card class="card_event card_roxo">
+<div class="row body">
+    <div class="col-lg-12" style="text-align: left">
+<p>{{article.desc}}</p>
+</div>
+</div>
+<div class="row footer">
+    <p> <i class="fa fa-calendar"></i>Data: {{article.eventDate | date}}</p>
+</div>
+</md-card>
+</div>
 
-                    <div class="row header">
-                        <div class="col-lg-3" style="text-align: left; margin-top:7px;">
-                            <img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
-                        </div>
-                        <div class="col-lg-6" style="text-align:left; margin-top:10px;">
-                            <p>{{article.disciplina}}</p>
-                            <p class="cinzento">{{article.createdBy}}</p>
-                        </div>
-                        <div class="col-lg-3 disciplina">
-                            <p>TPC</p>
-                        </div>
+<div class="col-lg-4 card col-xs-12" *ngIf="article.type == 4 && filtro == 4">
+    <md-card class="card_event card_vermelho">
+<i style="float: right; color: red; position: absolute; top: 10px; right: 10px;" class="fa fa-times fa-lg" (click)="removeEvento(article.$key)"></i>
+        <div class="row header">
+            <div class="col-lg-3" style="text-align: left; margin-top:7px;">
+<img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
+</div>
+<div class="col-lg-5" style="text-align:left; margin-top:10px;">
+<p>{{article.disciplina}}</p>
+<p class="cinzento">{{article.createdBy}}</p>
+</div>
+<div class="col-lg-3 col-xs-3 disciplina">
+    <p>Aviso</p>
+</div>
+</div>
 
-                    </div>
+<div class="row body">
+    <div class="col-lg-12" style="text-align: left">
+<p>{{article.desc}}</p>
+</div>
+</div>
+<div class="row footer">
+    <p> <i class="fa fa-calendar"></i>Data: {{article.eventDate | date}}</p>
+</div>
+</md-card>
+</div>
 
-                    <div class="row body">
-                        <div class="col-lg-12" style="text-align: left">
-                            <p>{{article.desc}}</p>
-                        </div>
-                    </div>
-                    <div class="row footer">
-                        <p> <i class="fa fa-calendar"></i>Entrega até {{article.eventDate | date}}</p>
-                    </div>
-                </md-card>
-            </div>
-            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 3 && filtro == 3">
-                <md-card class="card_event card_amarelo">
+</div>
+</div>
 
-                    <div class="row header">
-                        <div class="col-lg-3" style="text-align: left; margin-top:7px;">
-                            <img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
-                        </div>
-                        <div class="col-lg-6" style="text-align:left; margin-top:10px;">
-                            <p>{{article.disciplina}}</p>
-                            <p class="cinzento">{{article.createdBy}}</p>
-                        </div>
-                        <div class="col-lg-3 disciplina">
-                            <p>Evento</p>
-                        </div>
-                    </div>
-
-                    <div class="row body">
-                        <div class="col-lg-12" style="text-align: left">
-                            <p>{{article.desc}}</p>
-                        </div>
-                    </div>
-                    <div class="row footer">
-                        <p> <i class="fa fa-calendar"></i>Entrega até {{article.eventDate | date}}</p>
-                    </div>
-                </md-card>
-            </div>
-
-            <div class="col-lg-4 card col-xs-12" *ngIf="article.type == 4 && filtro == 4">
-                <md-card class="card_event card_vermelho">
-
-                    <div class="row header">
-                        <div class="col-lg-3" style="text-align: left; margin-top:7px;">
-                            <img [src]="article.photoUrl" class="img-small" style="display:inline; margin-right: 10px;">
-                        </div>
-                        <div class="col-lg-6" style="text-align:left; margin-top:10px;">
-                            <p>{{article.disciplina}}</p>
-                            <p class="cinzento">{{article.createdBy}}</p>
-                        </div>
-                        <div class="col-lg-3 col-xs-3 disciplina">
-                            <p>Aviso</p>
-                        </div>
-                    </div>
-
-                    <div class="row body">
-                        <div class="col-lg-12" style="text-align: left">
-                            <p>{{article.desc}}</p>
-                        </div>
-                    </div>
-                    <div class="row footer">
-                        <p> <i class="fa fa-calendar"></i>Data {{article.eventDate | date}}</p>
-                    </div>
-                </md-card>
-            </div>
-
-        </div>
-    </div>
-
-    <button md-fab class="fab" (click)="insertMode = true">
+<button md-fab class="fab" (click)="insertMode = true">
     <md-icon class="md-24">add</md-icon>
 </button>
 </div>

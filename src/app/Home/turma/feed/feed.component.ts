@@ -16,8 +16,9 @@ export class FeedComponent implements OnInit {
     id: string;
     body: any;
     filtro: any;
-    feed: any;
+    feed: any = undefined;
     teacher: any;
+    check: any;
     search: any;
     photo: any;
     searchMode: boolean = false;
@@ -35,7 +36,7 @@ export class FeedComponent implements OnInit {
             desc: "",
             eventDate: this.date,
             dateCreation: Date.now(),
-            type: 0,
+            type: 1,
             disciplina: "",
         });
         this.sub = this.route.parent.params.subscribe(params => {
@@ -44,11 +45,10 @@ export class FeedComponent implements OnInit {
 
         this.feed = this.af.database.list('turmas/' + this.id + '/feed', {
             query: {
-                orderByChild: "eventDate"
-
+                orderByChild: "eventDate",
             }
         });
-
+        this.feed.subscribe(check => this.check = check)
         this.af.auth.subscribe(res => {
 
             this.photo = res.auth.photoURL;
@@ -80,7 +80,7 @@ export class FeedComponent implements OnInit {
 
                     this.http.post('https://caderneta-2b6e4.firebaseio.com/turmas/' + this.id + '/feed.json', this.body)
                         .subscribe(
-                        data => { console.log("sucesso") },
+                        data => { this.insertMode = false },
                         err =>
                             () => console.log('complete')
                         );

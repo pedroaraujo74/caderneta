@@ -41,12 +41,10 @@ export class HomeComponent implements OnInit {
 
     logout() {
 
-        this.af.auth.subscribe(res => {
-
-
+    
             this.router.navigateByUrl('/login');
-            this.af.auth.logout();
-        });
+
+    
 
     }
 

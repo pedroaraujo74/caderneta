@@ -20,33 +20,33 @@
     <div class="row">
         <div class="col-lg-6" *ngFor="let turma of item; let i = index;">
             <md-card class="animated fadeIn" (click)='goto(turma[0].$key)' style="cursor: pointer">
-                {{turma[0]?.nome}}
-            </md-card>
-        </div>
+<p>{{turma[0]?.nome}} </p>
+
+</md-card>
+</div>
+</div>
+
+
+
+<h3>Operações</h3>
+<div class="row">
+    <div class="col-lg-12">
+        <md-card>
+            <h4>Se desejar adicionar uma nova turma insira o seu nome</h4>
+            <md-input placeholder="Nome" [(ngModel)]="class_name"></md-input>
+            <button md-raised-button color="primary" (click)="add()">Adicionar Turma</button>
+        </md-card>
     </div>
+</div>
 
-
-
-    <h3>Operações</h3>
-    <div class="row">
-        <div class="col-lg-12">
-            <md-card>
-                <h4>Se desejar adicionar uma nova turma insira o seu nome</h4>
-                <md-input placeholder="Nome" [(ngModel)]="class_name"></md-input>
-                <button md-raised-button color="primary"  (click)="add()">Adicionar Turma</button>
-                
-            </md-card>
-        </div>
+<div class="row">
+    <div class="col-lg-12">
+        <md-card>
+            <h4>Se desejar associar-se a uma turma já existente insira o código fornecido pelo professor</h4>
+            <md-input placeholder="Codigo Turma" [(ngModel)]="class_name1"></md-input>
+            <button md-raised-button color="primary" (click)="associar()">Associar</button>
+        </md-card>
     </div>
-
-    <div class="row">
-        <div class="col-lg-12">
-            <md-card>
-                <h4>Se desejar associar-se a uma turma já existente insira o código fornecido pelo professor</h4>
-                <md-input placeholder="Codigo Turma" [(ngModel)]="class_name1"></md-input>
-                <button md-raised-button color="primary" (click)="associar()">Associar</button>
-            </md-card>
-        </div>
-    </div>
+</div>
 
 </div>
