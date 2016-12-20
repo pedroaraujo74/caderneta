@@ -19,6 +19,7 @@ export class FeedComponent implements OnInit {
     feed: any = undefined;
     teacher: any;
     check: any;
+    user_id : any;
     search: any;
     photo: any;
     searchMode: boolean = false;
@@ -29,7 +30,6 @@ export class FeedComponent implements OnInit {
     ngOnInit() {
 
         this.filtro = 0;
-
         this.search = 0;
         this.form = this._fb.group({
             title: "",
@@ -50,24 +50,23 @@ export class FeedComponent implements OnInit {
         });
         this.feed.subscribe(check => this.check = check)
         this.af.auth.subscribe(res => {
-
+            this.user_id = res.uid;
             this.photo = res.auth.photoURL;
 
         });
-
     }
 
 
+
+
     addEvent(model, isValid: boolean) {
-
-
         this.af.auth.subscribe(res => {
 
-            this.http.get('https://caderneta-2b6e4.firebaseio.com/professores/' + res.uid + '.json')
-                .map(res => res).subscribe(data => {
+            this.http.get('https://caderneta-2b6e4.firebaseio.com/professores/' + res.uid + '.json').subscribe(data => {
                     this.teacher = data.json();
 
                     this.body = {
+                        user_id: res.uid,
                         title: model.title,
                         desc: model.desc,
                         eventDate: this.date,
@@ -84,7 +83,6 @@ export class FeedComponent implements OnInit {
                         err =>
                             () => console.log('complete')
                         );
-
                 });
         });
     }

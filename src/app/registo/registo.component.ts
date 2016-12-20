@@ -26,10 +26,11 @@ export class RegistoComponent implements OnInit {
 
     ngOnInit() {
         this.form = this._fb.group({
-            name: "",
-            email: "",
-            password: "",
-            disciplina: "",
+            name: [null, Validators.required],
+            email: [null, Validators.required],
+            password: [null, Validators.required],
+            disciplina: [null, Validators.required],
+            telemovel: [null, Validators.compose([Validators.required, Validators.minLength(9)])]
         });
 
     }
@@ -48,6 +49,9 @@ export class RegistoComponent implements OnInit {
             email: model.email,
             name: model.name,
             disciplina: model.disciplina,
+            telemovel: model.telemovel,
+            photoUrl: 'https://firebasestorage.googleapis.com/v0/b/caderneta-2b6e4.appspot.com/o/default.jpg?alt=media&token=8efe0f7c-c9ac-4491-ac42-87988da46927',
+            codigo_turmas: ["0"]
         }
 
         if (model.password != this.pw_confirm) {

@@ -11,6 +11,7 @@ p{
 img{
     position: relative;
     top: 96px;
+    height: 150px;
     width: 150px;
     display: inline;
     z-index: 1;
@@ -24,5 +25,5 @@ img{
 }
 
 .labels{
-    text-transform: uppercase;
+    font-weight: bold;
 }

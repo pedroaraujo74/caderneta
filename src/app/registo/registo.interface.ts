@@ -3,4 +3,5 @@ export interface User {
   email: string;
   password: string;
   disciplina: string;
+  telemovel: string;
 }

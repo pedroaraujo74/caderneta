@@ -4,6 +4,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { Http, Headers } from '@angular/http'
 import { Router, ActivatedRoute } from '@angular/router'
 
+
 @Component({
     selector: 'chat',
     templateUrl: 'chat.component.html',
@@ -29,6 +30,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
     }
 
+
+
+
     scrollToBottom(): void {
         try {
             this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
@@ -39,7 +43,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
     ngOnInit() {
 
-
+      
         this.form = this._fb.group({
             texto: ["", Validators.compose([Validators.required, Validators.minLength(1)])]
         });
@@ -74,11 +78,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     addZero(i) {
 
 
-      if (i < 10) {
-          i = "0" + i;
-      }
-      return i;
-  }
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
 
     enviar(model) {
 
@@ -117,4 +121,3 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         });
     }
 }
-    

@@ -19,6 +19,9 @@ export class RegistoSocialComponent implements OnInit {
     email: any;
     form: FormGroup;
     err: any;
+    pw_confirm: any;
+    nome: any;
+    isVisible: any;
 
     constructor(public af: AngularFire, private router: Router, private http: Http, private _fb: FormBuilder) { }
 
@@ -28,16 +31,14 @@ export class RegistoSocialComponent implements OnInit {
 
             this.name = res.auth.displayName;
             this.email = res.auth.email;
+
         })
         this.form = this._fb.group({
-            name: "",
-            email: "",
-            disciplina: "",
-            codigo_turma: ""
+
+            disciplina: [null, Validators.required],
+            telemovel: [null, Validators.compose([Validators.required, Validators.minLength(9)])]
         });
 
-
- 
     }
 
     registar(model: User, isValid: boolean) {
@@ -46,24 +47,19 @@ export class RegistoSocialComponent implements OnInit {
 
             this.body_bd = {
                 email: res.auth.email,
-                name: res.auth.displayName,
+                name: this.name,
+                telemovel: model.telemovel,
                 disciplina: model.disciplina,
-                codigo_turma: model.codigo_turma,
                 photoUrl: res.auth.photoURL
             }
-            
-            console.log(res);
+
             this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + res.uid + '/.json', this.body_bd)
                 .map(res => res.json())
                 .subscribe(
                 data => {
                     let teste = this.af.auth.subscribe(res => {
                         console.log(res);
-
-                        res.auth.updateProfile({
-                            displayName: "professor",
-                            photoURL: res.auth.photoURL
-                        })
+                       
                     })
                 },
 

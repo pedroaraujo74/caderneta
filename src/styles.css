@@ -90,4 +90,51 @@ i{
 }
 
 
+.md-radio-container {
+    top: 5px!important;;
+}
 
+
+.radio1 .md-radio-checked .md-radio-container .md-radio-outer-circle{
+    border-color: #2196F3!important;
+}
+
+.radio1 .md-radio-checked .md-radio-container .md-radio-inner-circle{
+    background-color: #2196F3!important;
+}
+
+
+.radio2 .md-radio-checked .md-radio-container .md-radio-outer-circle{
+    border-color: #38DC5F!important;
+}
+
+.radio2 .md-radio-checked .md-radio-container .md-radio-inner-circle{
+    background-color: #38DC5F!important;
+}
+
+
+.radio3 .md-radio-checked .md-radio-container .md-radio-outer-circle{
+    border-color: #9340f0!important;
+}
+
+.radio3 .md-radio-checked .md-radio-container .md-radio-inner-circle{
+    background-color: #9340f0!important;
+}
+
+
+.radio4 .md-radio-checked .md-radio-container .md-radio-outer-circle{
+    border-color: #FFCB2B!important;
+}
+
+.radio4 .md-radio-checked .md-radio-container .md-radio-inner-circle{
+    background-color: #FFCB2B!important;
+}
+
+
+.radio5 .md-radio-checked .md-radio-container .md-radio-outer-circle{
+    border-color: #F53D3D!important;
+}
+
+.radio5 .md-radio-checked .md-radio-container .md-radio-inner-circle{
+    background-color: #F53D3D!important;
+}

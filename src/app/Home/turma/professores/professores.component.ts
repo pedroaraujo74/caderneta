@@ -13,18 +13,18 @@ export class ProfessoresComponent implements OnInit {
     professores: any;
     sub: any;
     id: any;
+    _professores: any;
     constructor(private af: AngularFire, private route: ActivatedRoute, private router: Router) { }
     ngOnInit() {
 
         this.sub = this.route.parent.params.subscribe(params => {
             this.id = params['id']; // (+) converts string 'id' to a number
-
         });
 
-        this.af.auth.subscribe(res => {
 
+        this.af.auth.subscribe(res => {
             this.professores = this.af.database.list('/professores', {
-            
+
             });
 
             /*    let teste = this.af.database.list(this.professores,{
@@ -32,18 +32,9 @@ export class ProfessoresComponent implements OnInit {
                         orderByChild: "$key",
                         equalTo: this.id
                     }
-    
                 });
                 */
-            let obs = this.professores.subscribe(result => {
-                console.log(result);
-                var valuesWith460 = result.filter(function (val) {
-                    return val.codigo_turmas[0] === "-KY4Jl3N103L6kNd-liQ";
-                });
-                console.log("a");
-                console.log(valuesWith460);
 
-            });
 
 
         });

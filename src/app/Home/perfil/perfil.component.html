@@ -4,27 +4,30 @@
 <div class="container">
 
     <div class="row perfil">
-
-
-        <div class="col-lg-9 col-lg-offset-2 col-xs-12" style="text-align: center">
-            <div class="row">
-                <img [src]="professor?.photoUrl" class="img-responsive img-circle">
+        <div class="col-lg-4 col-lg-offset-4 col-xs-12" style="text-align: center">
+<div class="row">
+    <img [src]="professor?.photoUrl" class="img-responsive img-circle">
+</div>
+<div class="row">
+    <md-card class="perfil-card">
+        <h1>{{professor?.name}}</h1>
+        <h4>Professor de {{professor?.disciplina}}</h4>
+        <div class="row info">
+            <div class="col-lg-4 col-xs-12">
+                <p class="labels">E-mail: </p>
             </div>
-            <div class="row">
-                <md-card class="perfil-card">
-                    <h1>{{professor?.name}}</h1>
-                    <h4>Professor de {{professor?.disciplina}}</h4>
-
-                    <div class="row info">
-                        <div class="col-lg-4 col-lg-offset-2 col-xs-2">
-                            <p class="labels">Email: </p>
-                        </div>
-                        <div class="col-lg-6 col-xs-10 ">
-                            <p class="pull-left"> {{professor?.email}} </p>
-                        </div>
-                    </div>
-                </md-card>
+            <div class="col-lg-8 col-xs-12 ">
+                <p class="pull-left"> {{professor?.email}} </p>
             </div>
-
+            <div class="col-lg-4 col-xs-12">
+                <p class="labels">Telemóvel </p>
+            </div>
+            <div class="col-lg-8 col-xs-12 ">
+                <p class="pull-left"> {{professor?.telemovel}} </p>
+            </div>
         </div>
-    </div>
+    </md-card>
+</div>
+
+</div>
+</div>

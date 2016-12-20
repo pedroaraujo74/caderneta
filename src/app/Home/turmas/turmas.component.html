@@ -1,7 +1,7 @@
 <router-outlet>
 </router-outlet>
 
-<div class="container">
+<div class="container animated fadeIn">
 
     <div *ngIf="mensagem" class="alert alert-success animated fadeIn">
         <strong>Successo!</strong> {{mensagem}}
@@ -10,41 +10,54 @@
         <strong>Erro!</strong> {{erro}}
     </div>
 
-
-    <h1>Bem-Vindo {{teacher?.name}}</h1>
-    <h3>Listagem de Turmas</h3>
+    <h3 style="margin-top: 40px; margin-bottom: 0">TURMAS</h3>
 
     <p *ngIf="!item">
         <md-progress-circle mode="indeterminate" color="primary"></md-progress-circle>
     </p>
-    <div class="row">
-        <div class="col-lg-6" *ngFor="let turma of item; let i = index;">
-            <md-card class="animated fadeIn" (click)='goto(turma[0].$key)' style="cursor: pointer">
-<p>{{turma[0]?.nome}} </p>
-
-</md-card>
-</div>
-</div>
-
-
-
-<h3>Operações</h3>
+    <div class="row" style="margin-bottom: 30px;">
+        <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let turma of item; let i = index;">
+            <md-card style="padding-top: 16px;padding-right: 12px;padding-bottom: 16px;padding-left: 12px; height: 74px" *ngIf="turma[0].$key != '0'">
+                <div style="text-align: left; float: left">
+                    <h4 style="margin-top: 0; color: #15a9fc; font-weight: 600; margin-bottom: 5px; font-size: 18px;">{{turma[0]?.nome}}</h4>
+                    <p style="margin-bottom: 0; color: #444; font-weight: 600;">Código: {{turma[0]?.$key}}</p>
+                </div>
+                <div style="text-align: right; float: right; cursor: pointer;" (click)='goto(turma[0].$key)'>
+                  <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 32px; margin-top: 5px; color: #9E9E9E"></i>
+                </div>
+            </md-card>
+        </div>
+    </div>
+<h3 style="margin-bottom: 0">OPERAÇÕES</h3>
 <div class="row">
-    <div class="col-lg-12">
-        <md-card>
-            <h4>Se desejar adicionar uma nova turma insira o seu nome</h4>
-            <md-input placeholder="Nome" [(ngModel)]="class_name"></md-input>
-            <button md-raised-button color="primary" (click)="add()">Adicionar Turma</button>
+    <div class="col-lg-6">
+        <md-card class="">
+            <div class="row">
+                <div class="col-xs-12 text-left">
+                     <h4 style="color: #15a9fc; margin-top:0px; margin-bottom: 15px">Adicionar uma nova turma</h4>
+                </div>
+                <div class="col-xs-12">
+                    <md-input placeholder="Nome da turma" [(ngModel)]="class_name" style="width: 100%"></md-input>
+                </div>
+                <div class="col-xs-12 text-right" style="margin-top: 5px;">
+                     <button md-raised-button color="primary" (click)="add()" style="background-color: #15a9fc; color: #FFF">Adicionar turma</button>
+                </div>
+            </div>
         </md-card>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
         <md-card>
-            <h4>Se desejar associar-se a uma turma já existente insira o código fornecido pelo professor</h4>
-            <md-input placeholder="Codigo Turma" [(ngModel)]="class_name1"></md-input>
-            <button md-raised-button color="primary" (click)="associar()">Associar</button>
+            <div class="row">
+                <div class="col-xs-12 text-left">
+                     <h4 style="color: #15a9fc; margin-top:0px; margin-bottom: 15px">Associar-se a uma turma já existente</h4>
+                </div>
+                <div class="col-xs-12">
+                    <md-input placeholder="Código da turma" [(ngModel)]="class_name1" style="width: 100%"></md-input>
+                </div>
+                <div class="col-xs-12 text-right" style="margin-top: 5px;">
+                     <button md-raised-button color="primary" (click)="associar()" style="background-color: #15a9fc; color: #FFF">Associar turma</button>
+                </div>
+            </div>
         </md-card>
     </div>
 </div>

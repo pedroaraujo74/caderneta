@@ -17,10 +17,11 @@ export class TurmasComponent implements OnInit {
     email: any;
     teacher: any;
     item = [];
+    temp: any;
     turmas: any;
     class_name1: any;
     list: any;
-    class_name: any = "";
+    class_name: any;
     mensagem: any;
     disciplinas: FirebaseListObservable<any[]>;
     constructor(public af: AngularFire, private http: Http, private router: Router) { }
@@ -45,20 +46,22 @@ export class TurmasComponent implements OnInit {
 
             this.http.get('https://caderneta-2b6e4.firebaseio.com/professores/' + this.user.uid + '/codigo_turmas.json').subscribe(data => {
                 this.turmas = data.json();
+                if (data.json != null) {
+                    for (let i = 0; i < this.turmas.length; i++) {
+                        this.disciplinas = this.af.database.list('/turmas/', {
+                            query: {
+                                orderByKey: true,
+                                equalTo: this.turmas[i],
 
-                for (let i = 0; i < this.turmas.length; i++) {
-                    this.disciplinas = this.af.database.list('/turmas/', {
-                        query: {
-                            orderByKey: true,
-                            equalTo: this.turmas[i],
+                            }
+                        })
 
-                        }
-                    })
+                        this.disciplinas.subscribe(res => this.item[i] = res);
 
-                    this.disciplinas.subscribe(res => this.item[i] = res);
-
+                    }
+                } else {
+                    console.log("Nao tem Turmas")
                 }
-
             });
 
 
@@ -116,13 +119,13 @@ export class TurmasComponent implements OnInit {
 
 
 
-        if (this.class_name == "" || this.class_name == " " ||  this.class_name == "  " ) {
+        if (this.class_name == "" || this.class_name == " " || this.class_name == "  ") {
             this.erro = "Tem que inserir um nome para a turma";
         } else {
 
             this.http.post("https://caderneta-2b6e4.firebaseio.com/turmas.json", body).subscribe(
                 data => {
-                    this.class_name = ""; console.log(data);
+                    this.class_name = "";
 
                     this.mensagem = "Turma Inserida com sucesso, partilhe o seguinte código com os professores e encarregados de educação desta turma: " + data.json().name;
 
@@ -162,10 +165,17 @@ export class TurmasComponent implements OnInit {
                 console.log(this.erro);
             } else {
 
-                let temp = this.turmas;
-                temp.push(this.class_name1);
+                if (this.turmas == null) {
+                    this.temp = '["' + this.class_name1 + '"]';
+                    console.log(this.temp);
 
-                this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + this.user.uid + '/codigo_turmas.json', temp)
+                } else {
+                    console.log(this.turmas);
+                    this.temp = this.turmas;
+                    this.temp.push(this.class_name1);
+                }
+
+                this.http.put('https://caderneta-2b6e4.firebaseio.com/professores/' + this.user.uid + '/codigo_turmas.json', this.temp)
                     .subscribe(
                     data => { this.class_name1 = ""; this.ngOnInit(); },
                     err =>

@@ -17,7 +17,7 @@
 <i *ngIf="encarregado.notificacao == true" class="fa fa-bell" style="color: red"></i>
 <i *ngIf="encarregado.notificacao == false" class="fa fa-bell" style="color: #ccc"></i>
 <h4> {{encarregado.name}}</h4>
-<p> <strong>Encarregado de: </strong> {{encarregado.filho}}</p>
+<p style="margin-bottom: 20px"> <strong>Encarregado de: </strong> {{encarregado.filho}}</p>
 <button md-raised-button color="primary" style="width: 100%" (click)="avancar(encarregado?.$key)">Ver</button>
 </md-card>
 </div>

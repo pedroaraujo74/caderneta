@@ -1,3 +1,5 @@
+
+
 .eventCard{
     padding-bottom: 0;
 }
@@ -89,8 +91,7 @@ ng2-select{
   padding: 10px;
 }
 .feed{
-      
-        margin-top: 100px;
+    margin-top: 50px;
 }
 
 
@@ -295,3 +296,4 @@ md-card{
     line-height: 60px;
     margin-left: 30px;
 }
+

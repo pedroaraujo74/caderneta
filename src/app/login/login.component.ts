@@ -29,7 +29,8 @@ export class LoginComponent implements OnInit {
             password: ""
         });
 
-     
+
+
     }
 
 
@@ -52,9 +53,9 @@ export class LoginComponent implements OnInit {
 
         }).catch(err => {
             this.isVisible = true;
-               setTimeout(() => {
-            this.isVisible = false;
-        }, 5000);
+            setTimeout(() => {
+                this.isVisible = false;
+            }, 5000);
 
             this.err = err.message;
             if (err.message == "The email address is badly formatted.") {
@@ -95,7 +96,7 @@ export class LoginComponent implements OnInit {
 
         this.af.auth.login({
             provider: AuthProviders.Facebook,
-            method: AuthMethods.Redirect
+            method: AuthMethods.Popup
         }).then(res => {
             this.http.get('https://caderneta-2b6e4.firebaseio.com/professores/' + res.auth.uid + '.json')
                 .subscribe(data => {
